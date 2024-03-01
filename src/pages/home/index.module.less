@@ -1,24 +1,238 @@
+@colorSteelBlue: #4682B4;
+@colorLogo: #018BFF;
+@colorDeepSkyBlue: #00BFFF;
+@colorWhite: #FFFFFF;
+@colorRed: red;
+@colorBlack: #3B3B3B;
+
 .view {
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #efefef;
 }
 
-.content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
+.logo {
+    height: 70px;
+    width: 100%;
+    background-color: @colorDeepSkyBlue;
+    padding: 14px;
+    color: @colorWhite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    letter-spacing: 3px;
+    font-weight: bold;
+
+    .logoText {
+        position: relative;
+        top: -1px;
+        text-shadow:  0 0 5px @colorWhite;
+        text-transform: uppercase;
+        text-align: center;
+    }
 }
 
-.space-between {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
+.button {
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    width: 90px;
+    background-color: transparent;
+    justify-content: center;
+    padding: 0px;
+    color: @colorDeepSkyBlue;
 }
+
+.navButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blockFooter {
+    flex: 0 0 auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.blockNotify {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 10px;
+    border-radius: 10px;
+    min-height: 60px;
+    position: relative;
+    margin: 10px;
+}
+
+.blockAlarm {
+    position: relative;
+}
+
+.alarmButton {
+    border: 1px solid @colorRed;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    display: flex;
+    border-radius: 7px;
+    margin: 10px;
+    width: 30%;
+    padding: 10px;
+    background: white;
+    text-align: center;
+    position: absolute;
+    right: 0px;
+    color: @colorBlack;
+}
+
+.textLeft {
+    color: @colorRed;
+    align-items: flex-start;
+}
+
+.textSwitch {
+    font-weight: 500;
+    color: @colorBlack;
+}
+
+.textButton {
+    font-size: 14px;
+    position: relative;
+    bottom: 7px;
+    font-weight: 500;
+    color: @colorBlack;
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+}
+
+.textRight {
+    color: @colorLogo;
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+.textSensor {
+    position: relative;
+    bottom: 3px;
+    left: 3px;
+}
+
+.blockCraneCondition {
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 15px;
+    padding: 10px 0 0;
+    position: absolute;
+    bottom: 85px;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.zone {
+    text-align: center;
+}
+
+.openClose {
+    text-align: center;
+    font-size: 13px;
+    margin-top: 7px;
+    margin-bottom: 10px;
+}
+
+.waves {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 7px auto 10px;
+    border-radius: 300px;
+    box-shadow: 0px 0px 5px #a0e9ff;
+    background-color: rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+}
+
+.wave1, .wave2, .wave3, .wave4 {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+}
+
+.wave1, .wave3 {
+    left: -7%;
+    top: 50%;
+    border-radius: 45%;
+}
+
+.wave2, .wave4 {
+    left: -80%;
+    top: 50%;
+    border-radius: 45%;
+}
+
+.wave1 {
+    background-color: #a0e9ff;
+    animation: wave 6s linear infinite;
+}
+
+.wave2 {
+    background-color: #57d0ff;
+    animation: wave 5s linear infinite;
+}
+
+.wave3 {
+    background-color: #57d0ff;
+}
+
+.wave4 {
+    background-color: @colorDeepSkyBlue;
+}
+
+@keyframes wave {
+    100% {
+       transform: rotate(360deg);
+    }
+}
+
+// .counters {
+//     background-color: @colorWhite;
+//     margin: 10px 10px 0px 10px;
+//     padding: 10px;
+//     border-radius: 10px;
+// }
+
+// .displayFlex {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+// }
+
+// .meterCube {
+//     padding-left: 5px;
+//     display: inline-block;
+// }
+
+// .cube {
+//     font-size: 12px;
+//     position: relative;
+//     bottom: 7px;
+// }
+
+// .counterText {
+//     padding: 0 5px;
+// }
+
+
+
