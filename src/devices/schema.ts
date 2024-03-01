@@ -42,28 +42,6 @@ export const defaultSchema = [
     "type": "obj"
   },
   {
-    "attr": 1216,
-    "canTrigger": true,
-    "code": "battery_percentage",
-    "defaultRecommend": false,
-    "editPermission": true,
-    "executable": false,
-    "extContent": "",
-    "iconname": "icon-dp_battery",
-    "id": 7,
-    "mode": "ro",
-    "name": "电池电量",
-    "property": {
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "scale": 0,
-      "step": 1,
-      "type": "value"
-    },
-    "type": "obj"
-  },
-  {
     "attr": 0,
     "canTrigger": true,
     "code": "switch_2",
@@ -364,12 +342,76 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "counter_name",
+    "code": "status_counter_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 117,
+    "mode": "wr",
+    "name": "Status counter 1",
+    "property": {
+      "type": "bool"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "status_counter_2",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 118,
+    "mode": "wr",
+    "name": "Status counter 2",
+    "property": {
+      "type": "bool"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "status_counter_3",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 119,
+    "mode": "wr",
+    "name": "Status counter 3",
+    "property": {
+      "type": "bool"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "status_counter_4",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 120,
+    "mode": "wr",
+    "name": "Status counter 4",
+    "property": {
+      "type": "bool"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "counter_name",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 121,
     "mode": "rw",
     "name": "Counter name",
     "property": {
@@ -381,14 +423,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "sensor_name_1",
+    "code": "wired_sensor_name_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 118,
+    "id": 122,
     "mode": "rw",
-    "name": "Sensor name 1",
+    "name": "Wired sensor name 1",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -398,48 +440,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "sensor_name_2",
+    "code": "wired_sensor_name_2",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 119,
+    "id": 123,
     "mode": "rw",
-    "name": "Sensor name 2",
-    "property": {
-      "type": "string",
-      "maxlen": 255
-    },
-    "type": "obj"
-  },
-  {
-    "attr": 0,
-    "canTrigger": true,
-    "code": "sensor_name_3",
-    "defaultRecommend": false,
-    "editPermission": false,
-    "executable": true,
-    "extContent": "",
-    "id": 120,
-    "mode": "rw",
-    "name": "Sensor name 3",
-    "property": {
-      "type": "string",
-      "maxlen": 255
-    },
-    "type": "obj"
-  },
-  {
-    "attr": 0,
-    "canTrigger": true,
-    "code": "sensor_name_4",
-    "defaultRecommend": false,
-    "editPermission": false,
-    "executable": true,
-    "extContent": "",
-    "id": 121,
-    "mode": "rw",
-    "name": "Sensor name 4",
+    "name": "Wired sensor name 2",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -454,51 +462,9 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 122,
-    "mode": "rw",
-    "name": "Sensor 1",
-    "property": {
-      "unit": "",
-      "min": -2147483647,
-      "max": 2147483647,
-      "scale": 0,
-      "step": 1,
-      "type": "value"
-    },
-    "type": "obj"
-  },
-  {
-    "attr": 0,
-    "canTrigger": true,
-    "code": "sensor_2",
-    "defaultRecommend": false,
-    "editPermission": false,
-    "executable": true,
-    "extContent": "",
-    "id": 123,
-    "mode": "rw",
-    "name": "Sensor 2",
-    "property": {
-      "unit": "",
-      "min": -2147483647,
-      "max": 2147483647,
-      "scale": 0,
-      "step": 1,
-      "type": "value"
-    },
-    "type": "obj"
-  },
-  {
-    "attr": 0,
-    "canTrigger": true,
-    "code": "sensor_3",
-    "defaultRecommend": false,
-    "editPermission": false,
-    "executable": true,
-    "extContent": "",
     "id": 124,
     "mode": "rw",
-    "name": "Sensor 3",
+    "name": "Sensor 1",
     "property": {
       "unit": "",
       "min": -2147483647,
