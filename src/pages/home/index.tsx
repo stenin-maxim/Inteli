@@ -16,20 +16,20 @@ export function Home() {
     let sensorsLeak = [];
     let sensorsSecurityMode = [];
     let textDevice: string = Strings.getLang('device'),
-        textAlarm: string = Strings.getLang('text_alarm'),
+        textAlarm: string = Strings.getLang('alarm'),
         textNotify: string = Strings.getLang('notify'),
-        textLowBatteryOrSignal: string = Strings.getLang('low_battery_or_signal'),
-        textDisableAlarm: string = Strings.getLang('disable_alarm'),
-        textSwitchOn: string = Strings.getLang('switch_on'),
-        textSwitchOff: string = Strings.getLang('switch_off'),
-        textNotifyCleaning: string = Strings.getLang('text_notify_cleaning'),
-        textCleaningModeOn: string = Strings.getLang('text_cleaning_mode_on'),
-        textCleaningModeOff: string = Strings.getLang('text_cleaning_mode_off'),
-        textButtonCleaning: string = Strings.getLang('text_cleaning'),
-        textSensors: string = Strings.getLang('sensors'),
+        textLowBatteryOrSignal: string = Strings.getLang('lowBatteryOrSignal'),
+        textDisableAlarm: string = Strings.getLang('disableAlarm'),
+        textSwitchOn: string = Strings.getLang('on'),
+        textSwitchOff: string = Strings.getLang('off'),
+        textNotifyCleaning: string = Strings.getLang('notifyCleaning'),
+        textCleaningModeOn: string = Strings.getLang('cleaningModeOn'),
+        textCleaningModeOff: string = Strings.getLang('cleaningModeOff'),
+        textButtonCleaning: string = Strings.getLang('cleaning'),
+        textRadioSensors: string = Strings.getLang('radioSensors'),
         textCancel: string = Strings.getLang('cancel'),
         textConfirm: string = Strings.getLang('confirm'),
-        textContentAlarm: string = Strings.getLang('text_content_alarm'),
+        textContentAlarm: string = Strings.getLang('contentAlarm'),
         textSettings: string = Strings.getLang('settings'),
         textJournal: string = Strings.getLang('journal');
 
@@ -85,7 +85,7 @@ export function Home() {
     function notifyLowBatteryOrSignal(): object
     {
         if (alarm && (sensorsSecurityMode.length > 0)) {
-            return notify(textLowBatteryOrSignal + ' ' + textSensors + ': ' + sensorsLeak.join(', '));
+            return notify(textLowBatteryOrSignal + ' ' + textRadioSensors + ': ' + sensorsLeak.join(', '));
         }
     }
 
@@ -95,7 +95,7 @@ export function Home() {
     function notifyLeak(): object
     {
         if (alarm && (sensorsLeak.length > 0)) {
-            return notify(textAlarm + ' ' + textSensors + ': ' + sensorsLeak.join(', '));
+            return notify(textAlarm + ' ' + textRadioSensors + ': ' + sensorsLeak.join(', '));
         }
     }
 
@@ -274,13 +274,6 @@ export function Home() {
                     >
                         <Icon type="icon-a-scrollfill" size={40}/>
                         <Text className={styles.textButton}>{textJournal}</Text>
-                    </Button>
-                    <Button
-                        className={styles.button}
-                        onClick={() => navigateTo({ url: '/pages/sensors/index'})}
-                    >
-                        <Icon type="icon-a-dotradiowavesleftandright" size={40}/>
-                        <Text className={styles.textButton}>{textSensors}</Text>
                     </Button>
                     <Button
                         className={styles.button}
