@@ -24,6 +24,8 @@ export default {
         radioSensorSettings: 'Radio Sensor Settings',
         wiredSensorSettings: 'Wired Sensor Settings',
         multizoneMode: 'Multizone Mode',
+        // Counters
+        counter: 'Counter',
     },
     zh: {
         on: '开启',
