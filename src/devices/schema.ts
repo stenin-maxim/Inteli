@@ -42,6 +42,28 @@ export const defaultSchema = [
     "type": "obj"
   },
   {
+    "attr": 1216,
+    "canTrigger": true,
+    "code": "battery_percentage",
+    "defaultRecommend": false,
+    "editPermission": true,
+    "executable": false,
+    "extContent": "",
+    "iconname": "icon-dp_battery",
+    "id": 7,
+    "mode": "ro",
+    "name": "Battery",
+    "property": {
+      "unit": "",
+      "min": 0,
+      "max": 101,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
     "attr": 0,
     "canTrigger": true,
     "code": "switch_2",
@@ -457,12 +479,80 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "sensor_1",
+    "code": "radio_sensor_name_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 124,
+    "mode": "rw",
+    "name": "Radio sensor name 1",
+    "property": {
+      "type": "string",
+      "maxlen": 255
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "radio_sensor_name_2",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 125,
+    "mode": "rw",
+    "name": "Radio sensor name 2",
+    "property": {
+      "type": "string",
+      "maxlen": 255
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "radio_sensor_name_3",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 126,
+    "mode": "rw",
+    "name": "Radio sensor name 3",
+    "property": {
+      "type": "string",
+      "maxlen": 255
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "radio_sensor_name_4",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 127,
+    "mode": "rw",
+    "name": "Radio sensor name 4",
+    "property": {
+      "type": "string",
+      "maxlen": 255
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_1",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 128,
     "mode": "rw",
     "name": "Sensor 1",
     "property": {
