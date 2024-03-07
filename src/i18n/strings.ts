@@ -26,6 +26,13 @@ export default {
         multizoneMode: 'Multizone Mode',
         // Counters
         counter: 'Counter',
+        name_counter: 'Name counter',
+        indicator_counter: 'Counter indicator',
+        setting_counter: 'Setting counter',
+        impuls_liter: '1 pulse per 1 liter of water',
+        impuls_10_liter: '1 pulse per 10 liters of water',
+        status_counter: 'The status of the counter',
+        save: 'Save',
     },
     zh: {
         on: '开启',

@@ -16,6 +16,11 @@ export const routes: Routes = [
         path: '/pages/counters/index',
         name: 'Counters',
     },
+    {
+        route: '/counter-1',
+        path: '/pages/counter-1/index',
+        name: 'Counter 1',
+    },
     // {
     //     route: '/radio-sensors',
     //     path: '/pages/radio-sensors/index',
