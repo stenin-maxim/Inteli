@@ -13,5 +13,6 @@
   },
   "baseversion": "2.13.3",
   "projectname": "Inteli",
-  "devMode": "ray"
+  "devMode": "ray",
+  "compileType": "miniprogram"
 }
