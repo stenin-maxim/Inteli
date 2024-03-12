@@ -1,6 +1,7 @@
 import Strings from '../../i18n';
 
-let textNameCounter: string = Strings.getLang('name_counter'),
+let textCounter: string = Strings.getLang('counter'),
+    textNameCounter: string = Strings.getLang('name_counter'),
     textIndicatorCounter: string = Strings.getLang('indicator_counter'),
     textSettingCounter: string = Strings.getLang('setting_counter'),
     textImpulsLiter: string = Strings.getLang('impuls_liter'),
@@ -71,6 +72,7 @@ function viewCounter(counter: number, multiplier: string): object
 }
 
 export {
+    textCounter,
     textNameCounter,
     textIndicatorCounter, 
     textSettingCounter,
