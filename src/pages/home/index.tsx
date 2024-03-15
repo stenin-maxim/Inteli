@@ -31,7 +31,9 @@ export function Home() {
         textConfirm: string = Strings.getLang('confirm'),
         textContentAlarm: string = Strings.getLang('contentAlarm'),
         textSettings: string = Strings.getLang('settings'),
-        textJournal: string = Strings.getLang('journal');
+        textJournal: string = Strings.getLang('journal'),
+        textZone1: string = Strings.getLang('zone_1'),
+        textZone2: string = Strings.getLang('zone_2');
 
     /**
      * Кнопка выключения аварии
@@ -223,13 +225,13 @@ export function Home() {
                     <View className={styles.zone}
                         onClick={() => { clickCraneCondition('switch'); vibrateShort({type: 'heavy'}); vibrateShort({type: 'heavy'});
                     }}>
-                        <Text>Zone 1</Text>
+                        <Text>{textZone1}</Text>
                         {blockCraneCondition(craneCondition1)}
                     </View>
                     <View className={styles.zone}
                         onClick={() => { clickCraneCondition('switch_2'); vibrateShort({type: 'heavy'}); vibrateShort({type: 'heavy'});
                     }}>
-                        <Text>Zone 2</Text>
+                        <Text>{textZone2}</Text>
                         {blockCraneCondition(craneCondition2)}
                     </View>
                 </React.Fragment>

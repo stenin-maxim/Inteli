@@ -19,6 +19,8 @@ export default {
         contentAlarm: 'Are you sure you want to turn off the alarm?',
         cancel: 'Cancel',
         confirm: 'Confirm',
+        zone_1: 'Zone 1',
+        zone_2: 'Zone 2',
         // settings
         counterSettings: 'Counter settings',
         radioSensorSettings: 'Radio Sensor Settings',
