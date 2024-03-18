@@ -26,7 +26,12 @@ export default {
         radioSensorSettings: 'Radio Sensor Settings',
         wiredSensorSettings: 'Wired Sensor Settings',
         multizoneMode: 'Multizone Mode',
-        // Counters
+        // sensors
+        name_sensor: 'Name sensor:',
+        ignore: 'Ignore sensor alarm',
+        switch_zone: 'Switch the zone',
+        ok: 'Ok',
+        // counters
         counter: 'Counter',
         name_counter: 'Name counter',
         indicator_counter: 'Counter indicator',

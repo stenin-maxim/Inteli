@@ -1,0 +1,118 @@
+@colorSteelBlue: #4682B4;
+@colorBackground: #f2f4f6;
+@colorWhite: #FFFFFF;
+@colorGrayLight: #D3D3D3;
+@colorBlack: #3B3B3B;
+
+.zone {
+    text-align: center;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.sensors {
+    margin-top: 10px;
+}
+
+.wrapSensor {
+    display: inline-block;
+    width: 44%;
+    margin: 7px 10px;
+}
+
+.sensor {
+    background: @colorWhite;
+    // margin: 10px;
+    min-height: 70px;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .name {
+        padding: 0 10px;
+        position: relative;
+        color: @colorBlack;
+    }
+}
+
+.leftBlockSensor {
+    display: flex;
+    align-items: center;
+}
+
+.sensorNumber {
+    border-radius: 100px;
+    min-width: 27px;
+    min-height: 27px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    justify-content: center;
+}
+
+.sensorNumberAlarm {
+    background-color: red;
+    color: @colorWhite;
+    .sensorNumber
+}
+
+.sensorNumberNorm {
+    background-color: #efefef;
+    color: #000;
+    .sensorNumber
+}
+
+.input {
+    border: none;
+}
+
+/* start modal window */
+.headerModalWindow {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid @colorGrayLight;
+    color: @colorBlack;
+}
+
+.textModalWindow {
+    font-size: 13px;
+    margin-top: 10p;
+    color: @colorBlack;
+}
+
+.centerModalWindow {
+    padding: 10px;
+}
+
+.inputText {
+    padding-top: 15px;
+}
+
+.inputModalWindow {
+    border: 1px solid @colorGrayLight;
+    border-radius: 7px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 16px;
+}
+
+.buttonModalWindow {
+    border-top: 1px solid @colorGrayLight;
+    padding: 15px;
+}
+
+.checkbox {
+    margin: 20px 10px;
+    color: @colorBlack;
+}
+
+.checkboxIgnore {
+    margin-bottom: 15px;
+}

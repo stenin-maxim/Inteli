@@ -21,9 +21,9 @@ export const routes: Routes = [
         path: '/pages/counter-1/index',
         name: 'Counter 1',
     },
-    // {
-    //     route: '/radio-sensors',
-    //     path: '/pages/radio-sensors/index',
-    //     name: 'Counters',
-    // },
+    {
+        route: '/wired-sensors',
+        path: '/pages/wired-sensors/index',
+        name: 'Counters',
+    },
 ];
