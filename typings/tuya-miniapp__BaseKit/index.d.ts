@@ -1,7 +1,7 @@
 /**
  * BaseKit
  *
- * @version 3.0.0
+ * @version 3.4.1
  */
 declare namespace ty {
   /**
@@ -73,6 +73,7 @@ declare namespace ty {
      * scope.camera 摄像头权限
      * scope.userLocation 低精度定位权限
      * scope.userPreciseLocation 高精度定位权限
+     * scope.userInfo 用户信息
      */
     scope: string
     complete?: () => void
@@ -101,6 +102,7 @@ declare namespace ty {
      * scope.camera 摄像头权限
      * scope.userLocation 低精度定位权限
      * scope.userPreciseLocation 高精度定位权限
+     * scope.userInfo 用户信息
      */
     scope: string
     complete?: () => void
@@ -200,6 +202,25 @@ declare namespace ty {
     complete?: () => void
     success?: (params: null) => void
     failure?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 获取通用缓存路径
+   */
+  export function getTempDirectory(params?: {
+    complete?: () => void
+    success?: (params: {
+      /** 【待废弃， 不建议使用】临时文件夹路径 */
+      tempDirectory: string
+    }) => void
+    fail?: (params: {
       errorMsg: string
       errorCode: string | number
       innerError: {
@@ -630,6 +651,13 @@ declare namespace ty {
    * 设置系统剪贴板的内容
    */
   export function setClipboardData(params: {
+    /**
+     * 是否敏感信息
+     * true 是; false 否; 默认非敏感信息
+     * 如果是敏感信息, 则可组织敏感内容出现在Android 13及更高版本中的复制视觉确认中显示的任何内容预览中
+     * 需要注意的是, 该属性仅针对Android 13及更高版本的机型上适用
+     */
+    isSensitive?: boolean
     /** 剪贴板的内容 */
     data: string
     complete?: () => void
@@ -672,6 +700,15 @@ declare namespace ty {
   export function updateVolume(params: {
     /** 音量，阈值【0 - 1】 */
     value: number
+    /**
+     * 音量类型（仅Android生效）
+     * 0：语音电话的声音
+     * 2：响铃，通知，系统默认音等
+     * 3：手机音乐的声音
+     * 4：手机闹铃的声音
+     * 6：蓝牙音量
+     */
+    volumeMode?: number[]
     complete?: () => void
     success?: (params: null) => void
     fail?: (params: {
@@ -692,6 +729,52 @@ declare namespace ty {
     success?: (params: {
       /** 音量，阈值【0 - 1】 */
       value: number
+      /**
+       * 音量类型（仅Android生效）
+       * 0：语音电话的声音
+       * 2：响铃，通知，系统默认音等
+       * 3：手机音乐的声音
+       * 4：手机闹铃的声音
+       * 6：蓝牙音量
+       */
+      volumeMode: number
+    }) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 获取不同模式的系统音量
+   */
+  export function getCurrentVolumeByMode(params?: {
+    /**
+     * 音量类型（仅Android生效）
+     * 0：语音电话的声音
+     * 2：响铃，通知，系统默认音等
+     * 3：手机音乐的声音
+     * 4：手机闹铃的声音
+     * 6：蓝牙音量
+     */
+    volumeMode?: number
+    complete?: () => void
+    success?: (params: {
+      /** 音量，阈值【0 - 1】 */
+      value: number
+      /**
+       * 音量类型（仅Android生效）
+       * 0：语音电话的声音
+       * 2：响铃，通知，系统默认音等
+       * 3：手机音乐的声音
+       * 4：手机闹铃的声音
+       * 6：蓝牙音量
+       */
+      volumeMode: number
     }) => void
     fail?: (params: {
       errorMsg: string
@@ -811,6 +894,10 @@ declare namespace ty {
       screenHeight: number
       windowWidth: number
       windowHeight: number
+      /** 可使用窗口宽度 */
+      useableWindowWidth: number
+      /** 可使用窗口高度 */
+      useableWindowHeight: number
       statusBarHeight: number
       language: string
       safeArea: SafeArea
@@ -827,6 +914,8 @@ declare namespace ty {
       wifiEnabled: boolean
       theme?: Themes
       deviceOrientation?: Orientation
+      /** 设备等级(低:low-中:middle-高:high) */
+      deviceLevel: string
     }) => void
     fail?: (params: {
       errorMsg: string
@@ -853,6 +942,10 @@ declare namespace ty {
     screenHeight: number
     windowWidth: number
     windowHeight: number
+    /** 可使用窗口宽度 */
+    useableWindowWidth: number
+    /** 可使用窗口高度 */
+    useableWindowHeight: number
     statusBarHeight: number
     language: string
     safeArea: SafeArea
@@ -869,6 +962,8 @@ declare namespace ty {
     wifiEnabled: boolean
     theme?: Themes
     deviceOrientation?: Orientation
+    /** 设备等级(低:low-中:middle-高:high) */
+    deviceLevel: string
   }
 
   /**
@@ -1057,6 +1152,12 @@ declare namespace ty {
   export function scanCode(params?: {
     /** 是否只能从相机扫码，不允许从相册选择图片 */
     onlyFromCamera?: boolean
+    /** 是否显示动作标题(仅Android生效) */
+    isShowActionTitle?: boolean
+    /** 是否显示闪关灯(仅Android生效) */
+    isShowTorch?: boolean
+    /** 自定义提示标语(仅Android生效) */
+    customTips?: string
     /** 扫码类型 */
     scanType?: string[]
     complete?: () => void
@@ -1415,6 +1516,25 @@ declare namespace ty {
     }) => void
   ): void
 
+  export enum WidgetVersionType {
+    /** 线上版本 */
+    release = "release",
+
+    /** 预发版本 */
+    preview = "preview",
+  }
+
+  export enum WidgetPosition {
+    /** 居底展示 */
+    bottom = "bottom",
+
+    /** 居顶展示 */
+    top = "top",
+
+    /** 居中展示 */
+    center = "center",
+  }
+
   export type Profile = {
     /** 第一个 HTTP 重定向发生时的时间。有跳转且是同域名内的重定向才算，否则值为 0 */
     redirectStart: number
@@ -1676,6 +1796,15 @@ declare namespace ty {
   export type CurrentVolumeResponse = {
     /** 音量，阈值【0 - 1】 */
     value: number
+    /**
+     * 音量类型（仅Android生效）
+     * 0：语音电话的声音
+     * 2：响铃，通知，系统默认音等
+     * 3：手机音乐的声音
+     * 4：手机闹铃的声音
+     * 6：蓝牙音量
+     */
+    volumeMode: number
   }
 
   export type WifiListResponse = {
@@ -1741,6 +1870,7 @@ declare namespace ty {
      * scope.camera 摄像头权限
      * scope.userLocation 低精度定位权限
      * scope.userPreciseLocation 高精度定位权限
+     * scope.userInfo 用户信息
      */
     scope: string
   }
@@ -1758,6 +1888,41 @@ declare namespace ty {
     envVersion?: string
     /** 小程序链接，当传递该参数后，可以不传 appId 和 path */
     shortLink?: string
+  }
+
+  export type MiniWidgetDeploysBean = {
+    /** widget弹窗id */
+    dialogId: string
+    /** 要打开的小部件appid */
+    appId: string
+    /** 对应的小部件页面相对url, 如果为空则打开首页,path 中 ? 后面的部分会成为 query */
+    pagePath?: string
+    /** 面板类型设备id */
+    deviceId?: string
+    /** 面板群组类型群组id */
+    groupId?: string
+    /** 小部件样式,默认middle */
+    style?: string
+    /** 版本类型,默认release */
+    versionType?: WidgetVersionType
+    /** 版本号 */
+    version?: string
+    /** 展示位置,默认bottom */
+    position?: WidgetPosition
+    /** 点击空白处是否关闭 */
+    autoDismiss?: boolean
+    /**
+     * 是否优先展示默认缓存
+     * 对应属性在小程序容器3.1.0生效
+     */
+    autoCache?: boolean
+    /** 是否支持深色模式 */
+    supportDark?: boolean
+  }
+
+  export type MiniWidgetDialogBean = {
+    /** widget弹窗id */
+    dialogId: string
   }
 
   export type DeviceMotionBean = {
@@ -1807,6 +1972,11 @@ declare namespace ty {
   export type SaveFileSyncCallback = {
     /** 【待废弃， 不建议使用】存储后的文件路径 */
     savedFilePath: string
+  }
+
+  export type TempDirectoryResponse = {
+    /** 【待废弃， 不建议使用】临时文件夹路径 */
+    tempDirectory: string
   }
 
   export type FileStatsResponse = {
@@ -2075,6 +2245,18 @@ declare namespace ty {
     phoneNumber: string
   }
 
+  export type ClipboradSetReqBean = {
+    /**
+     * 是否敏感信息
+     * true 是; false 否; 默认非敏感信息
+     * 如果是敏感信息, 则可组织敏感内容出现在Android 13及更高版本中的复制视觉确认中显示的任何内容预览中
+     * 需要注意的是, 该属性仅针对Android 13及更高版本的机型上适用
+     */
+    isSensitive?: boolean
+    /** 剪贴板的内容 */
+    data: string
+  }
+
   export type ClipboradDataBean = {
     /** 剪贴板的内容 */
     data: string
@@ -2099,6 +2281,27 @@ declare namespace ty {
   export type UpdateVolumeParams = {
     /** 音量，阈值【0 - 1】 */
     value: number
+    /**
+     * 音量类型（仅Android生效）
+     * 0：语音电话的声音
+     * 2：响铃，通知，系统默认音等
+     * 3：手机音乐的声音
+     * 4：手机闹铃的声音
+     * 6：蓝牙音量
+     */
+    volumeMode?: number[]
+  }
+
+  export type CurrentVolumeParams = {
+    /**
+     * 音量类型（仅Android生效）
+     * 0：语音电话的声音
+     * 2：响铃，通知，系统默认音等
+     * 3：手机音乐的声音
+     * 4：手机闹铃的声音
+     * 6：蓝牙音量
+     */
+    volumeMode?: number
   }
 
   export type SystemSetting = {
@@ -2140,6 +2343,10 @@ declare namespace ty {
     screenHeight: number
     windowWidth: number
     windowHeight: number
+    /** 可使用窗口宽度 */
+    useableWindowWidth: number
+    /** 可使用窗口高度 */
+    useableWindowHeight: number
     statusBarHeight: number
     language: string
     safeArea: SafeArea
@@ -2156,6 +2363,8 @@ declare namespace ty {
     wifiEnabled: boolean
     theme?: Themes
     deviceOrientation?: Orientation
+    /** 设备等级(低:low-中:middle-高:high) */
+    deviceLevel: string
   }
 
   export type GetConnectedWifiParams = {
@@ -2229,6 +2438,12 @@ declare namespace ty {
   export type ScanCodeBean = {
     /** 是否只能从相机扫码，不允许从相册选择图片 */
     onlyFromCamera?: boolean
+    /** 是否显示动作标题(仅Android生效) */
+    isShowActionTitle?: boolean
+    /** 是否显示闪关灯(仅Android生效) */
+    isShowTorch?: boolean
+    /** 自定义提示标语(仅Android生效) */
+    customTips?: string
     /** 扫码类型 */
     scanType?: string[]
   }
@@ -2413,6 +2628,84 @@ declare namespace ty {
       }
     }) => void
   }): CreateInnerAudioContextTask
+
+  /**
+   * 一个用来控制小部件弹窗显示和关闭的对象
+   */
+  interface MiniWidgetDialogTask {
+    /**
+     * 关闭小部件弹窗
+     */
+    dismissMiniWidget(params: {
+      complete?: () => void
+      success?: (params: null) => void
+      fail?: (params: {
+        errorMsg: string
+        errorCode: string | number
+        innerError: {
+          errorCode: string | number
+          errorMsg: string
+        }
+      }) => void
+    }): void
+
+    /**
+     * 监听widget关闭事件
+     */
+    onWidgetDismiss(
+      listener: (params: {
+        /** widget弹窗id */
+        dialogId: string
+      }) => void
+    ): void
+
+    /**
+     * 取消监听widget关闭事件
+     */
+    offWidgetDismiss(
+      listener: (params: {
+        /** widget弹窗id */
+        dialogId: string
+      }) => void
+    ): void
+  }
+  export function openMiniWidget(params: {
+    /** 要打开的小部件appid */
+    appId: string
+    /** 对应的小部件页面相对url, 如果为空则打开首页,path 中 ? 后面的部分会成为 query */
+    pagePath?: string
+    /** 面板类型设备id */
+    deviceId?: string
+    /** 面板群组类型群组id */
+    groupId?: string
+    /** 小部件样式,默认middle */
+    style?: string
+    /** 版本类型,默认release */
+    versionType?: WidgetVersionType
+    /** 版本号 */
+    version?: string
+    /** 展示位置,默认bottom */
+    position?: WidgetPosition
+    /** 点击空白处是否关闭 */
+    autoDismiss?: boolean
+    /**
+     * 是否优先展示默认缓存
+     * 对应属性在小程序容器3.1.0生效
+     */
+    autoCache?: boolean
+    /** 是否支持深色模式 */
+    supportDark?: boolean
+    complete?: () => void
+    success?: (params: null) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): MiniWidgetDialogTask
 
   /**
    * 一个可以监听下载进度变化事件，以及取消下载任务的对象

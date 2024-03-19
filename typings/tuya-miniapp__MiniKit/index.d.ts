@@ -1,7 +1,7 @@
 /**
  * MiniKit
  *
- * @version 3.0.1
+ * @version 3.2.2
  */
 declare namespace ty {
   /**
@@ -456,6 +456,71 @@ declare namespace ty {
   export function setBoardTitleSync(boardBean?: BoardBean): null
 
   /**
+   * 小程序看板的icon，小程序icon，面板icon等
+   */
+  export function setBoardIcon(params: {
+    /** 看板的icon */
+    icon: string
+    complete?: () => void
+    success?: (params: null) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 小程序看板的icon，小程序icon，面板icon等
+   */
+  export function setBoardIconSync(boardIconBean?: BoardIconBean): null
+
+  /**
+   * 显示小程序看板中的标题和icon
+   */
+  export function showBoardTitleIcon(params?: {
+    complete?: () => void
+    success?: (params: null) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 显示小程序看板中的标题和icon
+   */
+  export function showBoardTitleIconSync(): null
+
+  /**
+   * 隐藏小程序看板中的标题和icon
+   */
+  export function hideBoardTitleIcon(params?: {
+    complete?: () => void
+    success?: (params: null) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 隐藏小程序看板中的标题和icon
+   */
+  export function hideBoardTitleIconSync(): null
+
+  /**
    * 获取菜单按钮（右上角胶囊按钮）的布局位置信息。坐标信息以屏幕左上角为原点。
    */
   export function getMenuButtonBoundingClientRect(params?: {
@@ -687,6 +752,33 @@ declare namespace ty {
       }
     }) => void
   }): void
+
+  /**
+   * 获取小程序账号信息
+   */
+  export function getAccountInfo(params?: {
+    complete?: () => void
+    success?: (params: {
+      /** 小程序账号信息 */
+      miniProgram: MiniProgramAccountInfo
+    }) => void
+    fail?: (params: {
+      errorMsg: string
+      errorCode: string | number
+      innerError: {
+        errorCode: string | number
+        errorMsg: string
+      }
+    }) => void
+  }): void
+
+  /**
+   * 获取小程序账号信息
+   */
+  export function getAccountInfoSync(): {
+    /** 小程序账号信息 */
+    miniProgram: MiniProgramAccountInfo
+  }
 
   /**
    * 在当前页面显示导航条加载动画
@@ -1020,9 +1112,28 @@ declare namespace ty {
     title: string
   }
 
+  export type BoardIconBean = {
+    /** 看板的icon */
+    icon: string
+  }
+
   export type OpenURLBean = {
     /** 要打开的url */
     url: string
+  }
+
+  export type MiniProgramAccountInfo = {
+    /** 小程序 appId */
+    appId: string
+    /**
+     * 小程序版本
+     * develop: 开发版
+     * trail: 体验版
+     * release: 正式版
+     */
+    envVersion: string
+    /** 小程序版本号 */
+    version: string
   }
 
   export type NavigationBarColorAnimationInfo = {
@@ -1207,6 +1318,11 @@ declare namespace ty {
   export type CanOpenURLResultBean = {
     /** 是否支持打开对应的url */
     isCanOpen?: boolean
+  }
+
+  export type AccountInfoResp = {
+    /** 小程序账号信息 */
+    miniProgram: MiniProgramAccountInfo
   }
 
   export type NavigationBarLoadingParams = {
