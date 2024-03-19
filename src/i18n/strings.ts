@@ -29,7 +29,7 @@ export default {
         // sensors
         name_sensor: 'Name sensor:',
         ignore: 'Ignore sensor alarm',
-        switch_zone: 'Switch the zone',
+        switch_zone: 'Switch the zone:',
         ok: 'Ok',
         // counters
         counter: 'Counter',

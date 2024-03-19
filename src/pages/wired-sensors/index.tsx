@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, Input, Switch, PageContainer, Button } from '@ray-js/ray';
+import { View, Text, Input, Switch, PageContainer, Button, RadioGroup, Label, Radio } from '@ray-js/ray';
 import styles from './index.module.less';
 import Strings from '../../i18n';
 import { useActions, useProps, useDevice } from '@ray-js/panel-sdk';
 import wiredSensors from '@/components/wired-sensors';
 
 interface Cmd {
+    readonly enableZone1: number;
+    readonly enableZone2: number;
     readonly enableIgnore: number;
     readonly disableIgnore: number;
 }
@@ -14,10 +16,33 @@ export default () => {
     const ACTIONS: any = useActions();
     const idCodes = useDevice().devInfo.idCodes;
     const cmd: Cmd = {
+        enableZone1:            0x01_00_00_00, // команда включения zone 1 на датчике
+        enableZone2:            0x02_00_00_00, // команда включения zone 2 на датчике
         enableIgnore:           0x03_00_00_00, // включить игнор аварии датчика
         disableIgnore:          0x04_00_00_00, // отключить игнор аварии датчика
     }
-    let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode));
+    let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode)),
+        [isShow, setIsShow] = React.useState(false),
+        [value, setValue] = React.useState(""),
+        [item, setItem]: any = React.useState({}),
+        toggleIsShow = () => setIsShow(!isShow), // Показать/скрыть модальное окно
+        sensors = wiredSensors(),
+        wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split('.'),
+        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split('.'),
+        indexForDpId = {
+            '128': 0, // wiredSensorName1
+            '129': 1,
+            '130': 2,
+            '131': 3,
+            '132': 4,
+            '133': 5,
+            '134': 0, // wiredSensorName2
+            '135': 1,
+            '136': 2,
+            '137': 3,
+            '138': 4,
+            '139': 5,
+        };
     let textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
         textSettings: string = Strings.getLang('settings'),
@@ -25,30 +50,6 @@ export default () => {
         textSwitchZone: string = Strings.getLang('switch_zone'),
         textNameSensor: string = Strings.getLang('name_sensor'),
         textOk: string = Strings.getLang('ok');
-
-    let [isShow, setIsShow] = React.useState(false);
-    let [value, setValue] = React.useState("");
-    let [item, setItem]: any = React.useState({});
-    let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
-
-    let sensors = wiredSensors();
-    let wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split('.');
-    let wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split('.');
-
-    let indexForDpId = {
-        '128': 0, // wiredSensorName1
-        '129': 1,
-        '130': 2,
-        '131': 3,
-        '132': 4,
-        '133': 5,
-        '134': 0, // wiredSensorName2
-        '135': 1,
-        '136': 2,
-        '137': 3,
-        '138': 4,
-        '139': 5,
-    }
 
     function handleInput(event: any): void
     {
@@ -103,7 +104,7 @@ export default () => {
     }
 
     /**
-     * Включить/выключить игнор аварии датчика, режим повышенной безопасности при низком заряде датчика
+     * Включить/выключить игнор аварии датчика
      * 
      * @param value - состояние checkbox
      * @param dpIdSensor - dpid датчика
@@ -124,7 +125,7 @@ export default () => {
     }
 
 
-    function viewSensor(item, index)
+    function viewSensor(item: any, index: number)
     {
         return (
             <React.Fragment key={index}>
@@ -160,7 +161,7 @@ export default () => {
                     <View className={styles.zone}>{textZone1}</View>
                     {
                         sensors.map((item: any, index: number) => {
-                            if (index < 6) {
+                            if (item.zone === false) {
                                 return viewSensor(item, index);
                             }
                         })
@@ -168,7 +169,7 @@ export default () => {
                     <View className={styles.zone}>{textZone2}</View>
                     {
                         sensors.map((item: any, index: number) => {
-                            if (index >= 6) {
+                            if (item.zone) {
                                 return viewSensor(item, index);
                             }
                         })
@@ -188,6 +189,44 @@ export default () => {
         )
     }
 
+    function viewZoneRadio(zone: string): object
+    {
+        if (zone) {
+            return (
+                <React.Fragment>
+                    <Label>
+                        <Radio value="0" color="#00BFFF">{textZone1}</Radio>
+                    </Label>
+                    <Label>
+                        <Radio value="1" color="#00BFFF" checked>{textZone2}</Radio>
+                    </Label>
+                </React.Fragment>
+            )
+        }
+
+        return (
+            <React.Fragment>
+                <Label>
+                    <Radio value="0" color="#00BFFF" checked>{textZone1}</Radio>
+                </Label>
+                <Label>
+                    <Radio value="1" color="#00BFFF">{textZone2}</Radio>
+                </Label>
+            </React.Fragment>
+        )
+        
+    }
+
+    const changeRadio = (e: any) => {
+        if (typeof e.detail.value === "string") {
+            if (e.detail.value === '0') {
+                ACTIONS.device_cmd.set(cmd.enableZone1);
+            } else {
+                ACTIONS.device_cmd.set(cmd.enableZone2);
+            }
+        }
+	};
+
     return (
         <View>    
             <View className={styles.sensors}>
@@ -201,10 +240,16 @@ export default () => {
                     <View className={styles.checkbox}>
                         <View className={styles.checkboxIgnore}>
                             <Switch type="checkbox" color="#00BFFF" checked={item.ignore}
-                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableIgnore, cmd.disableIgnore)}}>
+                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableIgnore, cmd.disableIgnore) }}>
                                 {textIgnore}
                             </Switch>
                         </View>
+                    </View>
+                    <View className={styles.centerModalWindow}>
+                        <Text className={styles.textModalWindow}>{textSwitchZone}</Text>
+                        <RadioGroup onChange={changeRadio} options={[]} className={styles.radioGroup}>
+                            {viewZoneRadio(item.zone)}
+                        </RadioGroup>
                     </View>
                     <View className={styles.centerModalWindow}>
                         <View className={styles.inputText}>
