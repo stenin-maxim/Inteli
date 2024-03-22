@@ -564,5 +564,320 @@ export const defaultSchema = [
       "type": "value"
     },
     "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_2",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 129,
+    "mode": "rw",
+    "name": "Sensor 2",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_3",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 130,
+    "mode": "rw",
+    "name": "Sensor 3",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_4",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 131,
+    "mode": "rw",
+    "name": "Sensor 4",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_5",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 132,
+    "mode": "rw",
+    "name": "Sensor 5",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_6",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 133,
+    "mode": "rw",
+    "name": "Sensor 6",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_7",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 134,
+    "mode": "rw",
+    "name": "Sensor 7",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_8",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 135,
+    "mode": "rw",
+    "name": "Sensor 8",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_9",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 136,
+    "mode": "rw",
+    "name": "Sensor 9",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_10",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 137,
+    "mode": "rw",
+    "name": "Sensor 10",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_11",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 138,
+    "mode": "rw",
+    "name": "Sensor 11",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_12",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 139,
+    "mode": "rw",
+    "name": "Sensor 12",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_13",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 140,
+    "mode": "rw",
+    "name": "Sensor 13",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_14",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 141,
+    "mode": "rw",
+    "name": "Sensor 14",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_15",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 142,
+    "mode": "rw",
+    "name": "Sensor 15",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_16",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 143,
+    "mode": "rw",
+    "name": "Sensor 16",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
   }
 ]
