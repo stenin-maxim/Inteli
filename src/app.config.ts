@@ -9,7 +9,12 @@ export const thing = {
     "navigationBarTextStyle": "black"
   },
   "pages": [
-    "pages/home/index"
+    "pages/home/index",
+    "pages/settings/index",
+    "pages/counters/index",
+    "pages/counter-1/index",
+    "pages/wired-sensors/index",
+    "pages/radio-sensors/index"
   ]
 };
 

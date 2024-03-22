@@ -272,13 +272,6 @@ export function Home() {
                     </Button>
                     <Button
                         className={styles.button}
-                        onClick={() => navigateTo({ url: '/pages/journal/index'})}
-                    >
-                        <Icon type="icon-a-scrollfill" size={40}/>
-                        <Text className={styles.textButton}>{textJournal}</Text>
-                    </Button>
-                    <Button
-                        className={styles.button}
                         onClick={() => navigateTo({ url: '/pages/settings/index'})}
                     >
                         <Icon type="icon-a-wrenchandscrewdriverfill" size={40}/>

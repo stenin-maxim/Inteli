@@ -189,35 +189,49 @@ export default () => {
         )
     }
 
-    function viewZoneRadio(zone: string): object
+    function viewZoneRadio(zone: string): object|false
     {
-        if (zone) {
+        let labelRadio: object;
+
+        if (multizoneMode) {
+            if (zone) {
+                labelRadio = (
+                    <React.Fragment>
+                        <Label>
+                            <Radio value="0" color="#00BFFF">{textZone1}</Radio>
+                        </Label>
+                        <Label>
+                            <Radio value="1" color="#00BFFF" checked>{textZone2}</Radio>
+                        </Label>
+                    </React.Fragment>
+                )
+            } else {
+                labelRadio = (
+                    <React.Fragment>
+                        <Label>
+                            <Radio value="0" color="#00BFFF" checked>{textZone1}</Radio>
+                        </Label>
+                        <Label>
+                            <Radio value="1" color="#00BFFF">{textZone2}</Radio>
+                        </Label>
+                    </React.Fragment>
+                )
+            }
+    
             return (
-                <React.Fragment>
-                    <Label>
-                        <Radio value="0" color="#00BFFF">{textZone1}</Radio>
-                    </Label>
-                    <Label>
-                        <Radio value="1" color="#00BFFF" checked>{textZone2}</Radio>
-                    </Label>
-                </React.Fragment>
+                <View className={styles.centerModalWindow}>
+                    <Text className={styles.textModalWindow}>{textSwitchZone}</Text>
+                    <RadioGroup onChange={changeRadio} className={styles.radioGroup}>
+                        {labelRadio}
+                    </RadioGroup>
+                </View>
             )
         }
 
-        return (
-            <React.Fragment>
-                <Label>
-                    <Radio value="0" color="#00BFFF" checked>{textZone1}</Radio>
-                </Label>
-                <Label>
-                    <Radio value="1" color="#00BFFF">{textZone2}</Radio>
-                </Label>
-            </React.Fragment>
-        )
-        
+        return false;
     }
 
-    const changeRadio = (e: any) => {
+    const changeRadio = (e: any): void => {
         if (typeof e.detail.value === "string") {
             if (e.detail.value === '0') {
                 ACTIONS.device_cmd.set(cmd.enableZone1);
@@ -234,7 +248,7 @@ export default () => {
             </View>
             <PageContainer show={isShow} position='bottom' onClickOverlay={toggleIsShow} round={true}>
                 <View>
-                    <View className={styles.headerModalWindow}>                                
+                    <View className={styles.headerModalWindow}>
                         {textSettings} <Text>{value}</Text>
                     </View>
                     <View className={styles.checkbox}>
@@ -245,12 +259,7 @@ export default () => {
                             </Switch>
                         </View>
                     </View>
-                    <View className={styles.centerModalWindow}>
-                        <Text className={styles.textModalWindow}>{textSwitchZone}</Text>
-                        <RadioGroup onChange={changeRadio} options={[]} className={styles.radioGroup}>
-                            {viewZoneRadio(item.zone)}
-                        </RadioGroup>
-                    </View>
+                    {viewZoneRadio(item.zone)}
                     <View className={styles.centerModalWindow}>
                         <View className={styles.inputText}>
                             <Text className={styles.textModalWindow}>{textNameSensor}</Text>

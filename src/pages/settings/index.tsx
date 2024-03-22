@@ -26,11 +26,11 @@ export default () => {
                 <Text className={styles.linkText}>{textMultizoneMode}</Text>
                 <Switch checked={multizoneMode} onChange={multizoneModeSwitch} color="#00BFFF"></Switch>
             </View>
-            <View className={styles.link} 
-                onClick={() => navigateTo({ url: '/pages/counters/index'})}
+            <View className={styles.link}
+                onClick={() => navigateTo({ url: '/pages/wired-sensors/index'})}
             >
-                <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                <Text className={styles.linkText}>{textCounterSettings}</Text>
+                <Icon type="icon-a-sunminfill" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
+                <Text className={styles.linkText}>{textWiredSensorSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>
             <View className={styles.link}
@@ -40,11 +40,11 @@ export default () => {
                 <Text className={styles.linkText}>{textRadioSensorSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>
-            <View className={styles.link}
-                onClick={() => navigateTo({ url: '/pages/wired-sensors/index'})}
+            <View className={styles.link} 
+                onClick={() => navigateTo({ url: '/pages/counters/index'})}
             >
-                <Icon type="icon-a-sunminfill" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                <Text className={styles.linkText}>{textWiredSensorSettings}</Text>
+                <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
+                <Text className={styles.linkText}>{textCounterSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>
             <View className={styles.info} 
