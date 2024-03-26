@@ -26,8 +26,6 @@ export default () => {
         
     let radioSensor = radioSensorName1.concat(';', radioSensorName2, ';', radioSensorName3, ';', radioSensorName4).split(';');
 
-    console.log(radioSensor);
-
     /**
 	* Создание датчика с параметрами
 	* 

@@ -27,22 +27,10 @@ export default () => {
         [item, setItem]: any = React.useState({}),
         toggleIsShow = () => setIsShow(!isShow), // Показать/скрыть модальное окно
         sensors = wiredSensors(),
-        wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split('.'),
-        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split('.'),
-        indexForDpId = {
-            '128': 0, // wiredSensorName1
-            '129': 1,
-            '130': 2,
-            '131': 3,
-            '132': 4,
-            '133': 5,
-            '134': 0, // wiredSensorName2
-            '135': 1,
-            '136': 2,
-            '137': 3,
-            '138': 4,
-            '139': 5,
-        };
+        wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split(';'),
+        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split(';'),
+        indexForDpId = {};
+
     let textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
         textSettings: string = Strings.getLang('settings'),
@@ -50,6 +38,14 @@ export default () => {
         textSwitchZone: string = Strings.getLang('switch_zone'),
         textNameSensor: string = Strings.getLang('name_sensor'),
         textOk: string = Strings.getLang('ok');
+    
+    for (let i = 128, j = 0; i <= 139; i++, j++) {
+        indexForDpId[i] = j;
+
+        if (j === 5) {
+            j = -1;
+        }
+    }
 
     function handleInput(event: any): void
     {
@@ -67,7 +63,6 @@ export default () => {
         return '1px solid white';
     }
 
-
     /**
      * Изменение имени датчика
      * 
@@ -77,29 +72,16 @@ export default () => {
     function editNameSensor(dpIdSensor: number, name: string): void
     {
         let str: string;
-        name = name.replace(/\./g, '');
+        name = name.replace(/\;/g, '');
 
-        switch (dpIdSensor) {
-            case 128:
-            case 129:
-            case 130:
-            case 131:
-            case 132:
-            case 133:
-                wiredSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
-                str = wiredSensorName1.join('.');
-                ACTIONS.wired_sensor_name_1.set(str);
-                break;
-            case 134:
-            case 135:
-            case 136:
-            case 137:
-            case 138:
-            case 139:
-                wiredSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
-                str = wiredSensorName2.join('.');
-                ACTIONS.wired_sensor_name_2.set(str);
-                break;
+        if (dpIdSensor >= 128 && 133 <= dpIdSensor) {
+            wiredSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
+            str = wiredSensorName1.join(';');
+            ACTIONS.wired_sensor_name_1.set(str);
+        } else if (dpIdSensor >= 134 && 139 <= dpIdSensor) {
+            wiredSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
+            str = wiredSensorName2.join(';');
+            ACTIONS.wired_sensor_name_2.set(str);
         }
     }
 
@@ -123,7 +105,6 @@ export default () => {
         }
         ACTIONS[name].set(cmd);
     }
-
 
     function viewSensor(item: any, index: number)
     {
@@ -286,6 +267,5 @@ export default () => {
                 </View>
             </PageContainer> 
         </View>
-
     )
 }

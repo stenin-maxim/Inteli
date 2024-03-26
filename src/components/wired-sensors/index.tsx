@@ -21,7 +21,7 @@ export default () => {
 
     let wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1));
     let wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2));
-    let wiredSensorNameArr = wiredSensorName1.concat('.', wiredSensorName2).split('.');
+    let wiredSensorNameArr = wiredSensorName1.concat(';', wiredSensorName2).split(';');
 
 	/**
 	* Создание датчика с параметрами
