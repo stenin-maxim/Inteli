@@ -85,6 +85,7 @@ export default {
         ok: 'Ok',
         add: 'Add',
         add_sensors: 'Adding sensors',
+        not_sensors: 'There is not a single radio sensor.',
         delete_sensor: 'Delete sensor',
         replace_sensor: 'Replaсe sensor',
         content_delete: 'Are you sure you want to remove the sensor?',

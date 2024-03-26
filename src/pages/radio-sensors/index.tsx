@@ -25,7 +25,7 @@ export default () => {
         disableSecurityMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
     }
 
-    const actions: any = useActions();
+    const ACTIONS: any = useActions();
     const idCodes = useDevice().devInfo.idCodes;
     const [isShow, setIsShow] = React.useState(false);
     const [value, setValue] = React.useState("");
@@ -47,12 +47,27 @@ export default () => {
         textConfirm: string = Strings.getLang('confirm'),
         textIgnore: string = Strings.getLang('ignore'),
         textSecurityMode: string = Strings.getLang('security_mode'),
-        textLowCharge: string = Strings.getLang('low_charge');
+        textLowCharge: string = Strings.getLang('low_charge'),
+        textOk: string = Strings.getLang('ok');
     let sensors = radioSensors();
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
+    let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
+        radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
+        radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
+        radioSensorName4 = useProps((props): string => String(props.radio_sensor_name_4)).split(';');
+    let indexForDpId = {};
 
-    console.log(sensors);
-    console.log(countSensors);
+    for (let i = 140, j = 0; i <= 171; i++, j++) {
+        indexForDpId[i] = j;
+        if (j === 7) {
+            j = -1;
+        }
+    }
+
+    function handleInput(event: any): void
+    {
+        setValue(event.value);
+    }
 
     function borderColor(item: any): string
     {
@@ -129,6 +144,96 @@ export default () => {
         )
     }
 
+    /**
+     * Параметры модального окна для удаления и замены датчика
+     * 
+     * @param title 
+     * @param content 
+     * @param cmd 
+     * @returns object
+     */
+    function confirm(title: string, content: string, cmd: number): object
+    {
+        return {
+            title: title,
+            content: content,
+            cancelText: textCancel,
+            confirmText: textConfirm,
+            confirmColor: '#ff0000',
+            success: (param: any): void => {
+                if (param.confirm) {
+                    deleteOrReplaceSensor(item.id, cmd);
+                    toggleIsShow();
+                }
+            },
+        }
+    }
+
+    /**
+     * Удаление и замена датчика
+     * 
+     * @param sensorId  - dpid sensor
+     * @param cmd - команда на удаление или замену
+     */
+    function deleteOrReplaceSensor(sensorId: number, cmd: number): void
+    {
+        let name = idCodes[sensorId];
+
+        ACTIONS[name].set(cmd);
+    }
+
+    /**
+     * Включить/выключить игнор аварии датчика, режим повышенной безопасности при низком заряде датчика
+     * 
+     * @param value - состояние checkbox
+     * @param sensorId - dpid датчика
+     * @param cmdEnable
+     * @param cmdDisable
+     */
+    function enableDisable(...args: any[]): void
+    {
+        let name: string = idCodes[args[1]];
+        let cmd: number;
+
+        if (args[0]) {
+            cmd = args[2];
+        } else {
+            cmd = args[3];
+        }
+        ACTIONS[name].set(cmd);
+    }
+
+    /**
+     * Изменение имени датчика
+     * 
+     * @param dpIdSensor - dpid датчика
+     * @param name - новое имя датчика
+     */
+    function editNameSensor(dpIdSensor: number, name: string): void|false
+    {
+        let str: string;
+        name = name.replace(/\;/g, '');
+
+        if (dpIdSensor >= 140 && dpIdSensor <= 147) {
+            radioSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorName1.join(';');
+            ACTIONS.radio_sensor_name_1.set(str);
+        } else if (dpIdSensor >= 148 && dpIdSensor <= 155) {
+            radioSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorName2.join(';');
+            ACTIONS.radio_sensor_name_2.set(str);
+        } else if (dpIdSensor >= 156 && dpIdSensor <= 163) {
+            radioSensorName3.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorName3.join(';');
+            console.log('sensor name 3');
+            ACTIONS.radio_sensor_name_3.set(str);
+        } else if (dpIdSensor >= 164 && dpIdSensor <= 171) {
+            radioSensorName4.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorName4.join(';');
+            ACTIONS.radio_sensor_name_4.set(str);
+        }
+    }
+
     function showSensors(): object
     {
         return (
@@ -187,11 +292,69 @@ export default () => {
                 <Button
                     style={{ padding: '15px' }}
                     onClick={() => { 
-                        actions.device_cmd.set(cmd.search); 
+                        ACTIONS.device_cmd.set(cmd.search); 
                         vibrateShort({type: 'heavy'}); vibrateShort({type: 'heavy'}); 
                     }}>{textAdd}
                 </Button>
             </View>
+            <PageContainer show={isShow} position='bottom' onClickOverlay={toggleIsShow} round={true}>
+                <View>
+                    <View className={styles.headerModalWindow}>                                
+                        {textSettings} <Text>{value}</Text>
+                    </View>
+                    <View className={styles.checkbox}>
+                        <View className={styles.checkboxIgnore}>
+                            <Switch type="checkbox" color="#00BFFF" checked={item.ignore}
+                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableIgnore, cmd.disableIgnore)}}>
+                                {textIgnore}
+                            </Switch>
+                        </View>
+                        <View>
+                            <Switch type="checkbox" color="#00BFFF" checked={item.securityMode}
+                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableSecurityMode, cmd.disableSecurityMode) }}>
+                                {textSecurityMode}
+                            </Switch>
+                        </View>
+                    </View>
+                    <View className={styles.centerModalWindow}>
+                        <View className={styles.deleteChangeSensor}>
+                            <View className={styles.buttonDeleteReplace} 
+                                onClick={() => { showModal(confirm(textDeleteSensor, textContentDelete, cmd.delete)) }
+                            }>
+                                <Icon type="icon-a-paintbrushfill" color="red" size={32}></Icon>
+                                <Text className={styles.textDeleteChange}>{textDeleteSensor}</Text>
+                            </View>
+                            <View className={styles.buttonDeleteReplace} 
+                                onClick={() => { showModal(confirm(textReplaceSensor, textContentReplace, cmd.search))}}
+                            >
+                                <Icon type="icon-repeat" color="black" size={32}></Icon>
+                                <Text className={styles.textDeleteChange}>{textReplaceSensor}</Text>
+                            </View>
+                        </View>
+                        <View className={styles.inputText}>
+                            <Text className={styles.textModalWindow}>{textNameSensor}</Text>
+                            <Input
+                                className={styles.inputModalWindow}
+                                placeholder="Name Sensor"
+                                maxLength={24}
+                                type="text"
+                                value={value}
+                                onInput={handleInput}
+                            >
+                            </Input>
+                        </View>
+                    </View>
+                    <View>
+                        <Button
+                            className={styles.buttonModalWindow}
+                            onClick={() => {
+                                toggleIsShow();
+                                editNameSensor(item.id, value);
+                            }}>{textOk}
+                        </Button>
+                    </View>
+                </View>
+            </PageContainer>
         </View>
     )
 }
