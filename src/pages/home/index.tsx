@@ -12,10 +12,12 @@ export function Home() {
     let craneCondition2: boolean = useProps((props): boolean => Boolean(props.switch_2));
     let cleaning: boolean = useProps((props): boolean => Boolean(props.cleaning));
     let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode));
-    
+    let battery: number = useProps((props): number => Number(props.battery_percentage));
     let sensorsLeak = [];
     let sensorsSecurityMode = [];
-    let textDevice: string = Strings.getLang('device'),
+    let textBattery: string = Strings.getLang('battery'),
+        textDevice: string = Strings.getLang('device'),
+        textCharging: string = Strings.getLang('charging'),
         textAlarm: string = Strings.getLang('alarm'),
         textNotify: string = Strings.getLang('notify'),
         textLowBatteryOrSignal: string = Strings.getLang('low_battery_or_signal'),
@@ -35,6 +37,43 @@ export function Home() {
         textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2');
 
+    /**
+     * Статус батареи устройства
+     * 
+     * @returns object
+     */
+    function colorAndTextBattery(): object
+    {
+        let color: string = 'black';
+        let text: string = textBattery;
+
+        if (battery > 100) {
+            text = textCharging;
+            color = '#07fa3c';
+
+            return (
+                <React.Fragment>
+                    <Text className={styles.batteryText}>{text}</Text>
+                    <Icon type="icon-a-boltfill" size={35} color={color}></Icon>
+                </React.Fragment>
+            )
+        } else if (battery >= 50 && battery <= 100) {
+            color = 'green';
+        } else if (battery >= 20 && battery < 50) {
+            color = 'orange';
+        } else if (battery > 0 && battery < 20) {
+            color = 'red';
+        }
+
+        return (
+            <React.Fragment>
+                <Text className={styles.batteryText}>{text}</Text>
+                <Icon type="icon-a-boltfill" size={35} color={color}></Icon>
+                <Text>{battery}%</Text>
+            </React.Fragment>
+        )
+    }
+    
     /**
      * Кнопка выключения аварии
      * 
@@ -257,6 +296,9 @@ export function Home() {
                 {notifyLowBatteryOrSignal()}
                 {notifyCleaning()}
                 {alarmResetButton()}
+            </View>
+            <View className={styles.battery}>
+                { colorAndTextBattery() }
             </View>
             <View className={styles.blockCraneCondition}>
                 {enableDisableZone()}
