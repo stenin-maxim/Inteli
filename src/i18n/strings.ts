@@ -52,6 +52,7 @@ export default {
         impuls_10_liter: '1 pulse per 10 liters of water',
         status_counter: 'The status of the counter',
         save: 'Save',
+        meter: 'm',
     },
     zh: {
         // home
@@ -106,5 +107,6 @@ export default {
         impuls_10_liter: '1 pulse per 10 liters of water',
         status_counter: 'The status of the counter',
         save: 'Save',
+        meter: 'm',
     },
 };
