@@ -63,7 +63,7 @@ export default () => {
                         <Text className={styles.threeNumber}>{viewCounter[1]}</Text>
                     </View>
                     <View className={styles.meterCube}>
-                        <Text>m</Text>
+                        <Text>{counter.textMeter}</Text>
                         <Text className={styles.cube}>3</Text>
                     </View>
                 </View>

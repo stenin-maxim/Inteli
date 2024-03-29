@@ -9,7 +9,8 @@ let textCounter: string = Strings.getLang('counter'),
     textImpulsLiter: string = Strings.getLang('impuls_liter'),
     textImpuls10Liter: string = Strings.getLang('impuls_10_liter'),
     textStatusCounter: string = Strings.getLang('status_counter'),
-    textSave: string = Strings.getLang('save');
+    textSave: string = Strings.getLang('save'),
+    textMeter: string = Strings.getLang('meter');
 
 /**
  * Добавление точки к числу
@@ -107,6 +108,7 @@ export {
     textSettingCounter,
     textStatusCounter,
     textSave,
+    textMeter,
     addPoint, 
     getCounter,
     viewCounter,
