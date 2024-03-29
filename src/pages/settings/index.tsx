@@ -40,13 +40,13 @@ export default () => {
                 <Text className={styles.linkText}>{textRadioSensorSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>
-            {/* <View className={styles.link} 
+            <View className={styles.link} 
                 onClick={() => navigateTo({ url: '/pages/counters/index'})}
             >
                 <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                 <Text className={styles.linkText}>{textCounterSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
-            </View> */}
+            </View>
             <View className={styles.info} 
                 onClick={() => navigateTo({ url: '/pages/info/index'})}
             >

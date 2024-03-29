@@ -1,4 +1,6 @@
 import Strings from '../../i18n';
+import React from 'react';
+import { Radio, Label } from '@ray-js/ray';
 
 let textCounter: string = Strings.getLang('counter'),
     textNameCounter: string = Strings.getLang('name_counter'),
@@ -36,7 +38,7 @@ function addPoint(eventValue: string): string {
  */
 function getCounter(valueCounter: string, multiplier: string): number
 {
-    let value = valueCounter.replace(".", "");
+    let value = valueCounter.replace(";", "");
     let counter: number;
 
     if (multiplier === '10') {
@@ -71,16 +73,42 @@ function viewCounter(counter: number, multiplier: string): object
     return [str1, str2];
 }
 
+function viewImpuls(multiplier: string): object
+{
+    if (multiplier === '1') {
+        return (
+            <React.Fragment>
+                <Label>
+                    <Radio value="1" color="#00BFFF" checked>{textImpulsLiter}</Radio>
+                </Label>
+                <Label>
+                    <Radio value="10" color="#00BFFF">{textImpuls10Liter}</Radio>
+                </Label>
+            </React.Fragment>
+        )
+    } else if (multiplier === '10') {
+        return (
+            <React.Fragment>
+                <Label>
+                    <Radio value="1" color="#00BFFF">{textImpulsLiter}</Radio>
+                </Label>
+                <Label>
+                    <Radio value="10" color="#00BFFF" checked>{textImpuls10Liter}</Radio>
+                </Label>
+            </React.Fragment>
+        )
+    }
+}
+
 export {
     textCounter,
     textNameCounter,
     textIndicatorCounter, 
     textSettingCounter,
-    textImpulsLiter,
-    textImpuls10Liter,
     textStatusCounter,
     textSave,
     addPoint, 
     getCounter,
     viewCounter,
+    viewImpuls,
 };

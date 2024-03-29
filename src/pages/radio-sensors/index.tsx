@@ -24,16 +24,22 @@ export default () => {
         enableSecurityMode:     0x05_00_00_00, // включить режим повышенной безопасности для датчика
         disableSecurityMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
     }
-
     const ACTIONS: any = useActions();
-    const idCodes = useDevice().devInfo.idCodes;
-    const [isShow, setIsShow] = React.useState(false);
-    const [value, setValue] = React.useState("");
-    const toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
-    const statusSearch: number = useProps((props): number => Number(props.device_cmd));
 
+    let idCodes = useDevice().devInfo.idCodes;
+    let [isShow, setIsShow] = React.useState(false);
+    let [value, setValue] = React.useState("");
     let [item, setItem]: any = React.useState({});
-    let numberOfSensors: string = Strings.getLang('number_of_sensors'),
+    let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
+    let statusSearch: number = useProps((props): number => Number(props.device_cmd));
+    let sensors = radioSensors();
+    let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
+    let indexForDpId = {};
+    let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
+        radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
+        radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
+        radioSensorName4 = useProps((props): string => String(props.radio_sensor_name_4)).split(';');
+    let textNumberOfSensors: string = Strings.getLang('number_of_sensors'),
         textNotSensors: string = Strings.getLang('not_sensors'),
         textAdd: string = Strings.getLang('add'),
         textAddSensors: string = Strings.getLang('add_sensors'),
@@ -47,18 +53,11 @@ export default () => {
         textConfirm: string = Strings.getLang('confirm'),
         textIgnore: string = Strings.getLang('ignore'),
         textSecurityMode: string = Strings.getLang('security_mode'),
-        textLowCharge: string = Strings.getLang('low_charge'),
         textOk: string = Strings.getLang('ok');
-    let sensors = radioSensors();
-    let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
-    let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
-        radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
-        radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
-        radioSensorName4 = useProps((props): string => String(props.radio_sensor_name_4)).split(';');
-    let indexForDpId = {};
 
     for (let i = 140, j = 0; i <= 171; i++, j++) {
         indexForDpId[i] = j;
+        
         if (j === 7) {
             j = -1;
         }
@@ -147,9 +146,9 @@ export default () => {
     /**
      * Параметры модального окна для удаления и замены датчика
      * 
-     * @param title 
-     * @param content 
-     * @param cmd 
+     * @param title
+     * @param content
+     * @param cmd
      * @returns object
      */
     function confirm(title: string, content: string, cmd: number): object
@@ -279,7 +278,7 @@ export default () => {
     return (
         <View>
             <View className={styles.numberOfSensors}>
-                <Text className={styles.title}>{ numberOfSensors }</Text>
+                <Text className={styles.title}>{ textNumberOfSensors }</Text>
                 <Text className={styles.countSensors}>{ countSensors }</Text>
             </View>
             <View>
@@ -318,7 +317,7 @@ export default () => {
                     </View>
                     <View className={styles.centerModalWindow}>
                         <View className={styles.deleteChangeSensor}>
-                            <View className={styles.buttonDeleteReplace} 
+                            <View className={styles.buttonDeleteReplace}
                                 onClick={() => { showModal(confirm(textDeleteSensor, textContentDelete, cmd.delete)) }
                             }>
                                 <Icon type="icon-a-paintbrushfill" color="red" size={32}></Icon>
