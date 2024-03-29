@@ -4,6 +4,7 @@ import { navigateTo, vibrateShort, showToast, showModal } from '@ray-js/ray';
 import styles from './index.module.less';
 import { useActions, useProps, useDevInfo } from '@ray-js/panel-sdk';
 import Strings from '../../i18n';
+import {indicatorCounter} from '@/components/counter/indicator-counter';
 
 export function Home() {
     const ACTIONS: any = useActions();
@@ -13,6 +14,19 @@ export function Home() {
     let cleaning: boolean = useProps((props): boolean => Boolean(props.cleaning));
     let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode));
     let battery: number = useProps((props): number => Number(props.battery_percentage));
+    let counterName: Array<string> = useProps((props): string => String(props.counter_name)).split(';');
+    let counter_1: number = useProps((props): number => Number(props.counter_1)),
+        counter_2: number = useProps((props): number => Number(props.counter_2)),
+        counter_3: number = useProps((props): number => Number(props.counter_3)),
+        counter_4: number = useProps((props): number => Number(props.counter_4));
+    let multiplier_1: string = useProps((props): string => String(props.multiplier_1)),
+        multiplier_2: string = useProps((props): string => String(props.multiplier_2)),
+        multiplier_3: string = useProps((props): string => String(props.multiplier_3)),
+        multiplier_4: string = useProps((props): string => String(props.multiplier_4));
+    let statusCounter1: boolean = useProps((props): boolean => Boolean(props.status_counter_1)),
+        statusCounter2: boolean = useProps((props): boolean => Boolean(props.status_counter_2)),
+        statusCounter3: boolean = useProps((props): boolean => Boolean(props.status_counter_3)),
+        statusCounter4: boolean = useProps((props): boolean => Boolean(props.status_counter_4));
     let sensorsLeak = [];
     let sensorsSecurityMode = [];
     let textBattery: string = Strings.getLang('battery'),
@@ -35,7 +49,8 @@ export function Home() {
         textSettings: string = Strings.getLang('settings'),
         //textJournal: string = Strings.getLang('journal'),
         textZone1: string = Strings.getLang('zone_1'),
-        textZone2: string = Strings.getLang('zone_2');
+        textZone2: string = Strings.getLang('zone_2'),
+        textMeter: string = Strings.getLang('meter');
 
     /**
      * Статус батареи устройства
@@ -285,11 +300,70 @@ export function Home() {
         )
     }
 
+    /**
+     * Счетчик
+     * 
+     * @param counter показание счетчика
+     * @param multiplier импульс счетчика
+     * @param name имя счетчика
+     * @returns 
+     */
+    function counter(counter: number, multiplier: string, name: string): object
+    {
+        return (
+            <View className={styles.displayFlex}>
+                <View className={styles.displayFlex}>
+                    <Icon type="icon-timer" color="#00BFFF" size={30}/>
+                    <Text className={styles.counterText}>{name}</Text>
+                </View>
+                <View>
+                    <Text>{indicatorCounter(counter, multiplier)}</Text>
+                    <View className={styles.meterCube}>
+                        <Text>{textMeter}</Text>
+                        <Text className={styles.cube}>3</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+
+    /**
+     * Показать счетчики
+     * 
+     * @returns false|object
+     */
+    function viewCounters(): false|object
+    {
+        if (statusCounter1 || statusCounter2 || statusCounter3 || statusCounter4) {
+            let objCounter1: object,
+                objCounter2: object,
+                objCounter3: object,
+                objCounter4: object;
+
+            if (statusCounter1) objCounter1 = counter(counter_1, multiplier_1, counterName[0]);
+            if (statusCounter2) objCounter2 = counter(counter_2, multiplier_2, counterName[1]);
+            if (statusCounter3) objCounter3 = counter(counter_3, multiplier_3, counterName[2]);
+            if (statusCounter4) objCounter4 = counter(counter_4, multiplier_4, counterName[3]);
+
+            return (
+                <View className={styles.counters}>
+                    {objCounter1}
+                    {objCounter2}
+                    {objCounter3}
+                    {objCounter4}
+                </View>
+            )
+        }
+
+        return false;
+    }
+
     return (
         <View className={styles.view}>
             <View className={styles.logo}>
                 <Text className={styles.logoText}>{useDevInfo().name}</Text>
             </View>
+            {viewCounters()}
             <View>
                 {notifyDevice()}
                 {notifyLeak()}
