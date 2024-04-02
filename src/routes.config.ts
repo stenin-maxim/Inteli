@@ -12,11 +12,6 @@ export const routes: Routes = [
         name: 'Settings',
     },
     {
-        route: '/counters',
-        path: '/pages/counters/index',
-        name: 'Counters',
-    },
-    {
         route: '/wired-sensors',
         path: '/pages/wired-sensors/index',
         name: 'Wired sensors',
@@ -27,6 +22,11 @@ export const routes: Routes = [
         name: 'Radio sensors',
     },
     {
+        route: '/counters',
+        path: '/pages/counters/index',
+        name: 'Counters',
+    },
+    {
         route: '/counter-1',
         path: '/pages/counter-1/index',
         name: 'Counter 1',
@@ -35,5 +35,15 @@ export const routes: Routes = [
         route: '/counter-2',
         path: '/pages/counter-2/index',
         name: 'Counter 2',
+    },
+    {
+        route: '/counter-3',
+        path: '/pages/counter-3/index',
+        name: 'Counter 3',
+    },
+    {
+        route: '/counter-4',
+        path: '/pages/counter-4/index',
+        name: 'Counter 4',
     },
 ];
