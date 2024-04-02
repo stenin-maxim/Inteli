@@ -12,14 +12,21 @@
     display: flex;
 }
 
-.counterText {
-    font-size: 11px;
-}
-
 .counterNameText {
     display: flex;
     flex-direction: column;
     margin-left: 7px;
+}
+
+.counterName {
+    text-overflow: ellipsis; /* Добавляем многоточие */
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    width: 190px;
+}
+
+.counterText {
+    font-size: 11px;
 }
 
 .indicatorCounter {
