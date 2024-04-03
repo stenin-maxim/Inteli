@@ -50,7 +50,8 @@ export function Home() {
         //textJournal: string = Strings.getLang('journal'),
         textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
-        textMeter: string = Strings.getLang('meter');
+        textMeter: string = Strings.getLang('meter'),
+        textSettingCounter: string = Strings.getLang('setting_counter');
 
     /**
      * Статус батареи устройства
@@ -313,7 +314,7 @@ export function Home() {
         return (
             <View className={styles.displayFlex}>
                 <View className={styles.displayFlex}>
-                    <Icon type="icon-timer" color="#00BFFF" size={30}/>
+                    <Icon type="icon-timer" color="#00BFFF" size={24}/>
                     <Text className={styles.counterText}>{name}</Text>
                 </View>
                 <View>
@@ -351,6 +352,10 @@ export function Home() {
                     {objCounter2}
                     {objCounter3}
                     {objCounter4}
+                    <View
+                        className={styles.textSettingCounter}
+                        onClick={() => navigateTo({ url: '/pages/counters/index'})}
+                    >{textSettingCounter}</View>
                 </View>
             )
         }
