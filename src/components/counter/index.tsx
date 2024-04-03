@@ -39,7 +39,7 @@ function addPoint(eventValue: string): string {
  */
 function getCounter(valueCounter: string, multiplier: string): number
 {
-    let value = valueCounter.replace(";", "");
+    let value = valueCounter.replace(".", "");
     let counter: number;
 
     if (multiplier === '10') {

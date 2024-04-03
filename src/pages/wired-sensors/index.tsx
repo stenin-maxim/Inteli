@@ -74,11 +74,11 @@ export default () => {
         let str: string;
         name = name.replace(/\;/g, '');
 
-        if (dpIdSensor >= 128 && 133 <= dpIdSensor) {
+        if (dpIdSensor >= 128 && dpIdSensor <= 133) {
             wiredSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
             str = wiredSensorName1.join(';');
             ACTIONS.wired_sensor_name_1.set(str);
-        } else if (dpIdSensor >= 134 && 139 <= dpIdSensor) {
+        } else if (dpIdSensor >= 134 && dpIdSensor <= 139) {
             wiredSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
             str = wiredSensorName2.join(';');
             ACTIONS.wired_sensor_name_2.set(str);
@@ -124,8 +124,8 @@ export default () => {
                             <View>
                                 <View className={ item.leak ? styles.sensorNumberAlarm : styles.sensorNumberNorm }>{item.sensorNumber}</View>
                             </View>
-                            <View>
-                                <Text className={styles.name}>{ item.name }</Text>
+                            <View className={styles.name}>
+                                { item.name }
                             </View>
                         </View>
                     </View> 
