@@ -53,10 +53,10 @@ export default () => {
 
 	return useProps((props: any) => {
 		let sensors = [];
-		let i = 128; // dpid sensor_1
+		let i = 129; // dpid sensor_1
 		let sensorNumber = 0;
 
-		while (i <= 139) {
+		while (i <= 140) {
 			let sensorIdentifier: string = idCodes[i];
 
 			if (sensorIdentifier === undefined) {

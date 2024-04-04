@@ -39,7 +39,7 @@ export default () => {
         textNameSensor: string = Strings.getLang('name_sensor'),
         textOk: string = Strings.getLang('ok');
     
-    for (let i = 128, j = 0; i <= 139; i++, j++) {
+    for (let i = 129, j = 0; i <= 140; i++, j++) {
         indexForDpId[i] = j;
 
         if (j === 5) {
@@ -74,11 +74,11 @@ export default () => {
         let str: string;
         name = name.replace(/\;/g, '');
 
-        if (dpIdSensor >= 128 && dpIdSensor <= 133) {
+        if (dpIdSensor >= 129 && dpIdSensor <= 134) {
             wiredSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
             str = wiredSensorName1.join(';');
             ACTIONS.wired_sensor_name_1.set(str);
-        } else if (dpIdSensor >= 134 && dpIdSensor <= 139) {
+        } else if (dpIdSensor >= 135 && dpIdSensor <= 140) {
             wiredSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
             str = wiredSensorName2.join(';');
             ACTIONS.wired_sensor_name_2.set(str);
