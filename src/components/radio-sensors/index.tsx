@@ -6,6 +6,7 @@ interface Mask {
 	readonly leak: number;
 	readonly ignore: number;
 	readonly securityMode: number;
+	readonly statusBatterySignal: number;
 }
 
 export default () => {
@@ -17,6 +18,7 @@ export default () => {
 		leak:                   0b00000000_00000100_00000000_00000000, // Протечка
 		ignore:                 0b00000000_00001000_00000000_00000000, // Игнор аварийных состояний
         securityMode:           0b00000000_00010000_00000000_00000000, // Режим повышеной безопасности
+		statusBatterySignal:    0b00000000_00100000_00000000_00000000, // Зарегистрировано аварийное состояние датчика - потеря сигнала, низкий заряд
 	}
 
     let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)),
@@ -47,6 +49,7 @@ export default () => {
 				leak: Boolean(sensor & mask.leak),
 				ignore: Boolean(sensor & mask.ignore),
 				securityMode: Boolean(sensor & mask.securityMode),
+				statusBatterySignal: Boolean(sensor & mask.statusBatterySignal),
 				battery: Number(sensor & 0xFF),
 				signal: Number((sensor >> 8) & 0xFF),
 				name: sensorName,
