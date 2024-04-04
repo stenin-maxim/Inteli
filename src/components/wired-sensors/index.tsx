@@ -63,7 +63,6 @@ export default () => {
 				break;
 			}
 			
-			// Example: createSensor(Number(props.sensor_1), String(props.sensor_name_1), Number(device.sensor_1.id), sensors, 1);
 			createSensor(Number(props[sensorIdentifier]), wiredSensorNameArr[sensorNumber], Number(device[sensorIdentifier].id), sensors, ++sensorNumber);
 
 			i++;

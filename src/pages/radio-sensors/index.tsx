@@ -225,7 +225,6 @@ export default () => {
         } else if (dpIdSensor >= 157 && dpIdSensor <= 164) {
             radioSensorName3.splice(indexForDpId[dpIdSensor], 1, name);
             str = radioSensorName3.join(';');
-            console.log('sensor name 3');
             ACTIONS.radio_sensor_name_3.set(str);
         } else if (dpIdSensor >= 165 && dpIdSensor <= 172) {
             radioSensorName4.splice(indexForDpId[dpIdSensor], 1, name);

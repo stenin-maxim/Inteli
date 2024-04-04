@@ -5,6 +5,7 @@ import styles from './index.module.less';
 import { useActions, useProps, useDevInfo } from '@ray-js/panel-sdk';
 import Strings from '../../i18n';
 import {indicatorCounter} from '@/components/counter/indicator-counter';
+import radioSensors from '@/components/radio-sensors';
 
 export function Home() {
     const ACTIONS: any = useActions();
@@ -27,7 +28,7 @@ export function Home() {
         statusCounter2: boolean = useProps((props): boolean => Boolean(props.status_counter_2)),
         statusCounter3: boolean = useProps((props): boolean => Boolean(props.status_counter_3)),
         statusCounter4: boolean = useProps((props): boolean => Boolean(props.status_counter_4));
-    let sensorsLeak = [];
+    let arrRadioSensors: Array<any> = radioSensors();
     let sensorsSecurityMode = [];
     let textBattery: string = Strings.getLang('battery'),
         textDevice: string = Strings.getLang('device'),
@@ -52,6 +53,14 @@ export function Home() {
         textZone2: string = Strings.getLang('zone_2'),
         textMeter: string = Strings.getLang('meter'),
         textSettingCounter: string = Strings.getLang('setting_counter');
+
+    if (arrRadioSensors.length !== undefined) {
+        arrRadioSensors.map((item) => {
+            if (!item.ignore && item.securityMode && item.statusBatterySignal) {
+                sensorsSecurityMode.push(item.sensorNumber);
+            }
+        });
+    }
 
     /**
      * Статус батареи устройства
@@ -128,8 +137,7 @@ export function Home() {
             confirmColor: '#ff0000',
             success: (param: any): void => {
                 if (param.confirm) {
-                    ACTIONS.alarm.off(); 
-                    sensorsLeak = []; 
+                    ACTIONS.alarm.off();
                     sensorsSecurityMode = [];
                 }
             },
@@ -137,22 +145,22 @@ export function Home() {
     }
 
     /**
-     * Уведомление при низкой батареи или сигнала
+     * Уведомление при низкой батареи или сигнала, когда включена авария и режим безопасности датчика  
      */
     function notifyLowBatteryOrSignal(): object
     {
         if (alarm && (sensorsSecurityMode.length > 0)) {
-            return notify(textLowBatteryOrSignal + ' ' + textRadioSensors + ': ' + sensorsLeak.join(', '));
+            return notify(textLowBatteryOrSignal + ' ' + textRadioSensors + ': ' + sensorsSecurityMode.join(', '));
         }
     }
 
     /**
-     * Уведлмление при протечки на определенных датчиках
+     * Уведомление при аварии
      */
-    function notifyLeak(): object
+    function notifyAlarm(): object
     {
-        if (alarm && (sensorsLeak.length > 0)) {
-            return notify(textAlarm + ' ' + textRadioSensors + ': ' + sensorsLeak.join(', '));
+        if (alarm) {
+            return notify(textAlarm);
         }
     }
 
@@ -371,7 +379,7 @@ export function Home() {
             {viewCounters()}
             <View>
                 {notifyDevice()}
-                {notifyLeak()}
+                {notifyAlarm()}
                 {notifyLowBatteryOrSignal()}
                 {notifyCleaning()}
                 {alarmResetButton()}
