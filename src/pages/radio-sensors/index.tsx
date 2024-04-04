@@ -7,7 +7,7 @@ import Strings from '../../i18n';
 import radioSensors from '@/components/radio-sensors';
 
 interface Cmd {
-    readonly search: number;
+    // readonly search: number;
     readonly delete: number;
     readonly enableIgnore: number;
     readonly disableIgnore: number;
@@ -17,7 +17,7 @@ interface Cmd {
 
 export default () => {
     const cmd: Cmd = {
-        search:                 0x01_00_00_00, // команда поиск датчика
+        // search:                 0x01_00_00_00, // команда поиск датчика
         delete:                 0x02_00_00_00, // команда удаление датчика
         enableIgnore:           0x03_00_00_00, // включить игнор аварии датчика
         disableIgnore:          0x04_00_00_00, // отключить игнор аварии датчика
@@ -31,10 +31,11 @@ export default () => {
     let [value, setValue] = React.useState("");
     let [item, setItem]: any = React.useState({});
     let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
-    let statusSearch: number = useProps((props): number => Number(props.device_cmd));
+    // let statusSearch: number = useProps((props): number => Number(props.device_cmd));
     let sensors = radioSensors();
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
     let indexForDpId = {};
+    let radioSearch = useProps((props): boolean => Boolean(props.radio_search));
     let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
         radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
         radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
@@ -55,7 +56,7 @@ export default () => {
         textSecurityMode: string = Strings.getLang('security_mode'),
         textOk: string = Strings.getLang('ok');
 
-    for (let i = 140, j = 0; i <= 171; i++, j++) {
+    for (let i = 141, j = 0; i <= 172; i++, j++) {
         indexForDpId[i] = j;
         
         if (j === 7) {
@@ -213,20 +214,20 @@ export default () => {
         let str: string;
         name = name.replace(/\;/g, '');
 
-        if (dpIdSensor >= 140 && dpIdSensor <= 147) {
+        if (dpIdSensor >= 141 && dpIdSensor <= 148) {
             radioSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
             str = radioSensorName1.join(';');
             ACTIONS.radio_sensor_name_1.set(str);
-        } else if (dpIdSensor >= 148 && dpIdSensor <= 155) {
+        } else if (dpIdSensor >= 149 && dpIdSensor <= 156) {
             radioSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
             str = radioSensorName2.join(';');
             ACTIONS.radio_sensor_name_2.set(str);
-        } else if (dpIdSensor >= 156 && dpIdSensor <= 163) {
+        } else if (dpIdSensor >= 157 && dpIdSensor <= 164) {
             radioSensorName3.splice(indexForDpId[dpIdSensor], 1, name);
             str = radioSensorName3.join(';');
             console.log('sensor name 3');
             ACTIONS.radio_sensor_name_3.set(str);
-        } else if (dpIdSensor >= 164 && dpIdSensor <= 171) {
+        } else if (dpIdSensor >= 165 && dpIdSensor <= 172) {
             radioSensorName4.splice(indexForDpId[dpIdSensor], 1, name);
             str = radioSensorName4.join(';');
             ACTIONS.radio_sensor_name_4.set(str);
@@ -285,13 +286,13 @@ export default () => {
                 { countSensors ? showSensors() : <React.Fragment><View className={styles.notSensors}>{textNotSensors}</View></React.Fragment> }
             </View>
             <View>
-                { statusSearch === cmd.search ? viewTextAddSensors() : '' }
+                { radioSearch ? viewTextAddSensors() : '' }
             </View>
             <View className={styles.blockFooter}>
                 <Button
                     style={{ padding: '15px' }}
                     onClick={() => { 
-                        ACTIONS.device_cmd.set(cmd.search); 
+                        ACTIONS.radio_search.on();
                         vibrateShort({type: 'heavy'}); vibrateShort({type: 'heavy'}); 
                     }}>{textAdd}
                 </Button>
@@ -299,7 +300,7 @@ export default () => {
             <PageContainer show={isShow} position='bottom' onClickOverlay={toggleIsShow} round={true}>
                 <View>
                     <View className={styles.headerModalWindow}>                                
-                        {textSettings} <Text>{value}</Text>
+                        {textSettings}: <Text>{value}</Text>
                     </View>
                     <View className={styles.checkbox}>
                         <View className={styles.checkboxIgnore}>

@@ -428,12 +428,28 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "counter_name",
+    "code": "radio_search",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 121,
+    "mode": "rw",
+    "name": "Radio search",
+    "property": {
+      "type": "bool"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "counter_name",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 122,
     "mode": "rw",
     "name": "Counter name",
     "property": {
@@ -450,7 +466,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 122,
+    "id": 123,
     "mode": "rw",
     "name": "Wired sensor name 1",
     "property": {
@@ -467,7 +483,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 123,
+    "id": 124,
     "mode": "rw",
     "name": "Wired sensor name 2",
     "property": {
@@ -484,7 +500,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 124,
+    "id": 125,
     "mode": "rw",
     "name": "Radio sensor name 1",
     "property": {
@@ -501,7 +517,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 125,
+    "id": 126,
     "mode": "rw",
     "name": "Radio sensor name 2",
     "property": {
@@ -518,7 +534,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 126,
+    "id": 127,
     "mode": "rw",
     "name": "Radio sensor name 3",
     "property": {
@@ -535,7 +551,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 127,
+    "id": 128,
     "mode": "rw",
     "name": "Radio sensor name 4",
     "property": {
@@ -552,7 +568,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 128,
+    "id": 129,
     "mode": "rw",
     "name": "Sensor 1",
     "property": {
@@ -573,7 +589,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 129,
+    "id": 130,
     "mode": "rw",
     "name": "Sensor 2",
     "property": {
@@ -594,7 +610,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 130,
+    "id": 131,
     "mode": "rw",
     "name": "Sensor 3",
     "property": {
@@ -615,7 +631,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 131,
+    "id": 132,
     "mode": "rw",
     "name": "Sensor 4",
     "property": {
@@ -636,7 +652,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 132,
+    "id": 133,
     "mode": "rw",
     "name": "Sensor 5",
     "property": {
@@ -657,7 +673,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 133,
+    "id": 134,
     "mode": "rw",
     "name": "Sensor 6",
     "property": {
@@ -678,7 +694,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 134,
+    "id": 135,
     "mode": "rw",
     "name": "Sensor 7",
     "property": {
@@ -699,7 +715,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 135,
+    "id": 136,
     "mode": "rw",
     "name": "Sensor 8",
     "property": {
@@ -720,7 +736,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 136,
+    "id": 137,
     "mode": "rw",
     "name": "Sensor 9",
     "property": {
@@ -741,7 +757,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 137,
+    "id": 138,
     "mode": "rw",
     "name": "Sensor 10",
     "property": {
@@ -762,7 +778,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 138,
+    "id": 139,
     "mode": "rw",
     "name": "Sensor 11",
     "property": {
@@ -783,7 +799,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 139,
+    "id": 140,
     "mode": "rw",
     "name": "Sensor 12",
     "property": {
@@ -804,7 +820,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 140,
+    "id": 141,
     "mode": "rw",
     "name": "Sensor 13",
     "property": {
@@ -825,7 +841,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 141,
+    "id": 142,
     "mode": "rw",
     "name": "Sensor 14",
     "property": {
@@ -846,7 +862,7 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 142,
+    "id": 143,
     "mode": "rw",
     "name": "Sensor 15",
     "property": {
@@ -867,9 +883,72 @@ export const defaultSchema = [
     "editPermission": false,
     "executable": true,
     "extContent": "",
-    "id": 143,
+    "id": 144,
     "mode": "rw",
     "name": "Sensor 16",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_17",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 145,
+    "mode": "rw",
+    "name": "Sensor 17",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_18",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 146,
+    "mode": "rw",
+    "name": "Sensor 18",
+    "property": {
+      "unit": "",
+      "min": -2147483647,
+      "max": 2147483647,
+      "scale": 0,
+      "step": 1,
+      "type": "value"
+    },
+    "type": "obj"
+  },
+  {
+    "attr": 0,
+    "canTrigger": true,
+    "code": "sensor_19",
+    "defaultRecommend": false,
+    "editPermission": false,
+    "executable": true,
+    "extContent": "",
+    "id": 147,
+    "mode": "rw",
+    "name": "Sensor 19",
     "property": {
       "unit": "",
       "min": -2147483647,
