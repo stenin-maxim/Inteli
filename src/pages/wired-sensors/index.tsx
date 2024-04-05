@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, Text, Input, Switch, PageContainer, Button, RadioGroup, Label, Radio } from '@ray-js/ray';
+import { View, Text, Input, Switch, PageContainer, Button } from '@ray-js/ray';
 import styles from './index.module.less';
 import Strings from '../../i18n';
 import { useActions, useProps, useDevice } from '@ray-js/panel-sdk';
 import wiredSensors from '@/components/wired-sensors';
 
 interface Cmd {
-    readonly enableZone1: number;
-    readonly enableZone2: number;
     readonly enableIgnore: number;
     readonly disableIgnore: number;
 }
@@ -16,8 +14,6 @@ export default () => {
     const ACTIONS: any = useActions();
     const idCodes = useDevice().devInfo.idCodes;
     const cmd: Cmd = {
-        enableZone1:            0x01_00_00_00, // команда включения zone 1 на датчике
-        enableZone2:            0x02_00_00_00, // команда включения zone 2 на датчике
         enableIgnore:           0x03_00_00_00, // включить игнор аварии датчика
         disableIgnore:          0x04_00_00_00, // отключить игнор аварии датчика
     }
@@ -35,7 +31,6 @@ export default () => {
         textZone2: string = Strings.getLang('zone_2'),
         textSettings: string = Strings.getLang('settings'),
         textIgnore: string = Strings.getLang('ignore'),
-        textSwitchZone: string = Strings.getLang('switch_zone'),
         textNameSensor: string = Strings.getLang('name_sensor'),
         textOk: string = Strings.getLang('ok');
     
@@ -170,58 +165,6 @@ export default () => {
         )
     }
 
-    function viewZoneRadio(zone: string): object|false
-    {
-        let labelRadio: object;
-
-        if (multizoneMode) {
-            if (zone) {
-                labelRadio = (
-                    <React.Fragment>
-                        <Label>
-                            <Radio value="0" color="#00BFFF">{textZone1}</Radio>
-                        </Label>
-                        <Label>
-                            <Radio value="1" color="#00BFFF" checked>{textZone2}</Radio>
-                        </Label>
-                    </React.Fragment>
-                )
-            } else {
-                labelRadio = (
-                    <React.Fragment>
-                        <Label>
-                            <Radio value="0" color="#00BFFF" checked>{textZone1}</Radio>
-                        </Label>
-                        <Label>
-                            <Radio value="1" color="#00BFFF">{textZone2}</Radio>
-                        </Label>
-                    </React.Fragment>
-                )
-            }
-    
-            return (
-                <View className={styles.centerModalWindow}>
-                    <Text className={styles.textModalWindow}>{textSwitchZone}</Text>
-                    <RadioGroup onChange={changeRadio} className={styles.radioGroup}>
-                        {labelRadio}
-                    </RadioGroup>
-                </View>
-            )
-        }
-
-        return false;
-    }
-
-    const changeRadio = (e: any): void => {
-        if (typeof e.detail.value === "string") {
-            if (e.detail.value === '0') {
-                ACTIONS.device_cmd.set(cmd.enableZone1);
-            } else {
-                ACTIONS.device_cmd.set(cmd.enableZone2);
-            }
-        }
-	};
-
     return (
         <View>    
             <View className={styles.sensors}>
@@ -240,7 +183,6 @@ export default () => {
                             </Switch>
                         </View>
                     </View>
-                    {viewZoneRadio(item.zone)}
                     <View className={styles.centerModalWindow}>
                         <View className={styles.inputText}>
                             <Text className={styles.textModalWindow}>{textNameSensor}</Text>
