@@ -41,7 +41,7 @@ export default {
         replace_sensor: 'Replaсe sensor',
         content_delete: 'Are you sure you want to remove the sensor?',
         content_replace: 'Are you sure you want to replace the sensor?',
-        security_mode: 'Enhanced Security Mode',
+        safety_mode: 'Enhanced Safety Mode',
         low_charge: 'Low charge - close the tap',
         // counters
         counter: 'Counter',
@@ -96,7 +96,7 @@ export default {
         replace_sensor: 'Replaсe sensor',
         content_delete: 'Are you sure you want to remove the sensor?',
         content_replace: 'Are you sure you want to replace the sensor?',
-        security_mode: 'Enhanced Security Mode',
+        safety_mode: 'Enhanced Safety Mode',
         low_charge: 'Low charge - close the tap',
         // counters
         counter: 'Counter',

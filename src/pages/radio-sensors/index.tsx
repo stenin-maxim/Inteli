@@ -7,22 +7,22 @@ import Strings from '../../i18n';
 import radioSensors from '@/components/radio-sensors';
 
 interface Cmd {
-    // readonly search: number;
+    readonly search: number;
     readonly delete: number;
     readonly enableIgnore: number;
     readonly disableIgnore: number;
-    readonly enableSecurityMode: number;
-    readonly disableSecurityMode: number;
+    readonly enableSafetyMode: number;
+    readonly disableSafetyMode: number;
 }
 
 export default () => {
     const cmd: Cmd = {
-        // search:                 0x01_00_00_00, // команда поиск датчика
-        delete:                 0x02_00_00_00, // команда удаление датчика
-        enableIgnore:           0x03_00_00_00, // включить игнор аварии датчика
-        disableIgnore:          0x04_00_00_00, // отключить игнор аварии датчика
-        enableSecurityMode:     0x05_00_00_00, // включить режим повышенной безопасности для датчика
-        disableSecurityMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
+        search:               0x01_00_00_00, // команда поиск датчика
+        delete:               0x02_00_00_00, // команда удаление датчика
+        enableIgnore:         0x03_00_00_00, // включить игнор аварии датчика
+        disableIgnore:        0x04_00_00_00, // отключить игнор аварии датчика
+        enableSafetyMode:     0x05_00_00_00, // включить режим повышенной безопасности для датчика
+        disableSafetyMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
     }
     const ACTIONS: any = useActions();
 
@@ -53,7 +53,7 @@ export default () => {
         textCancel: string = Strings.getLang('cancel'),
         textConfirm: string = Strings.getLang('confirm'),
         textIgnore: string = Strings.getLang('ignore'),
-        textSecurityMode: string = Strings.getLang('security_mode'),
+        textSafetyMode: string = Strings.getLang('safety_mode'),
         textOk: string = Strings.getLang('ok');
 
     for (let i = 141, j = 0; i <= 172; i++, j++) {
@@ -97,16 +97,16 @@ export default () => {
      * Вывод предупреждения, при включенной повышенной опасности и аварии
      * 
      * @param ignore статус игнора - args[0]
-     * @param securityMode - статус включения режима повышенной безопасности - args[1]
+     * @param safetyMode - статус включения режима повышенной безопасности - args[1]
      * @param statusBatterySignal - статус потери сигнала и низкого заряда - args[2]
      * @returns object
      */
-    function alarmSecurityMode(...args: boolean[]): object|void
+    function alarmSafetyMode(...args: boolean[]): object|void
     {
         if (!args[0] && args[1] && args[2]) {
             return (
                 <React.Fragment>
-                    <View className={styles.securityMode}>
+                    <View className={styles.safetyMode}>
                         <Icon type="icon-warning" color="red" size={26}/>
                     </View>
                 </React.Fragment>
@@ -258,7 +258,7 @@ export default () => {
                             </View>
         
                             <View className={styles.signalBattery}>
-                                {alarmSecurityMode(item.ignore, item.securityMode, item.statusBatterySignal)}
+                                {alarmSafetyMode(item.ignore, item.safetyMode, item.statusBatterySignal)}
                                 {batterySensorColorIcon(item.battery)}
                                 <View className={styles.signal}>
                                     {item.online ? 
@@ -309,9 +309,9 @@ export default () => {
                             </Switch>
                         </View>
                         <View>
-                            <Switch type="checkbox" color="#00BFFF" checked={item.securityMode}
-                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableSecurityMode, cmd.disableSecurityMode) }}>
-                                {textSecurityMode}
+                            <Switch type="checkbox" color="#00BFFF" checked={item.safetyMode}
+                                onChange={(e) => { enableDisable(e.value, item.id, cmd.enableSafetyMode, cmd.disableSafetyMode) }}>
+                                {textSafetyMode}
                             </Switch>
                         </View>
                     </View>

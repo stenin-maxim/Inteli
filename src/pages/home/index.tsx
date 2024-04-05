@@ -29,7 +29,7 @@ export function Home() {
         statusCounter3: boolean = useProps((props): boolean => Boolean(props.status_counter_3)),
         statusCounter4: boolean = useProps((props): boolean => Boolean(props.status_counter_4));
     let arrRadioSensors: Array<any> = radioSensors();
-    let sensorsSecurityMode = [];
+    let sensorsSafetyMode = [];
     let textBattery: string = Strings.getLang('battery'),
         textDevice: string = Strings.getLang('device'),
         textCharging: string = Strings.getLang('charging'),
@@ -56,8 +56,8 @@ export function Home() {
 
     if (arrRadioSensors.length !== undefined) {
         arrRadioSensors.map((item) => {
-            if (!item.ignore && item.securityMode && item.statusBatterySignal) {
-                sensorsSecurityMode.push(item.sensorNumber);
+            if (!item.ignore && item.safetyMode && item.statusBatterySignal) {
+                sensorsSafetyMode.push(item.sensorNumber);
             }
         });
     }
@@ -138,7 +138,7 @@ export function Home() {
             success: (param: any): void => {
                 if (param.confirm) {
                     ACTIONS.alarm.off();
-                    sensorsSecurityMode = [];
+                    sensorsSafetyMode = [];
                 }
             },
         }
@@ -149,8 +149,8 @@ export function Home() {
      */
     function notifyLowBatteryOrSignal(): object
     {
-        if (alarm && (sensorsSecurityMode.length > 0)) {
-            return notify(textLowBatteryOrSignal + ' ' + textRadioSensors + ': ' + sensorsSecurityMode.join(', '));
+        if (alarm && (sensorsSafetyMode.length > 0)) {
+            return notify(textLowBatteryOrSignal + ' ' + textRadioSensors + ': ' + sensorsSafetyMode.join(', '));
         }
     }
 
