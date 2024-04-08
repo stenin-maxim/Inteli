@@ -94,8 +94,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    border-bottom: 1px solid @colorGrayLight;
-    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .inputText {
@@ -132,14 +131,28 @@
 }
 
 .checkbox {
-    margin: 20px 10px;
+    margin: 20px 10px 10px;
     color: @colorBlack;
 }
 
 .checkboxIgnore {
     margin-bottom: 15px;
 }
+
+.checkboxZone {
+    display: flex;
+    justify-content: space-around;
+    margin: 18px 0 0;
+}
 /* end modal window */
+
+.textZone {
+    padding-left: 10px;
+    font-size: 12px;
+    :first-child {
+        padding-right: 5px;
+    }
+}
 
 .signalBattery {
     display: flex;

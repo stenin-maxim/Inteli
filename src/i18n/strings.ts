@@ -43,6 +43,7 @@ export default {
         content_replace: 'Are you sure you want to replace the sensor?',
         safety_mode: 'Enhanced Safety Mode',
         low_charge: 'Low charge - close the tap',
+        zone_radio_sensor: 'The zone for the radio sensor:',
         // counters
         counter: 'Counter',
         name_counter: 'Name counter',
@@ -98,6 +99,7 @@ export default {
         content_replace: 'Are you sure you want to replace the sensor?',
         safety_mode: 'Enhanced Safety Mode',
         low_charge: 'Low charge - close the tap',
+        zone_radio_sensor: 'The zone for the radio sensor:',
         // counters
         counter: 'Counter',
         name_counter: 'Name counter',

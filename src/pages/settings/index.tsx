@@ -29,14 +29,14 @@ export default () => {
             <View className={styles.link}
                 onClick={() => navigateTo({ url: '/pages/wired-sensors/index'})}
             >
-                <Icon type="icon-a-sunminfill" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
+                <Icon type="icon-checkmark-1" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                 <Text className={styles.linkText}>{textWiredSensorSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>
             <View className={styles.link}
                 onClick={() => navigateTo({ url: '/pages/radio-sensors/index'})}
             >
-                <Icon type="icon-a-sunmaxfill" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
+                <Icon type="icon-a-wave3right" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                 <Text className={styles.linkText}>{textRadioSensorSettings}</Text>
                 <Icon type="icon-right" size={18}></Icon>
             </View>

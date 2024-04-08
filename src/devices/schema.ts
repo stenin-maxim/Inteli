@@ -316,14 +316,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "channel_1",
+    "code": "external_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 114,
     "mode": "rw",
-    "name": "Channel 1",
+    "name": "External 1",
     "property": {
       "type": "bool"
     },
@@ -332,14 +332,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "channel_2",
+    "code": "external_2",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 115,
     "mode": "rw",
-    "name": "Channel 2",
+    "name": "External 2",
     "property": {
       "type": "bool"
     },
