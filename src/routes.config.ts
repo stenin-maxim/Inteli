@@ -12,6 +12,11 @@ export const routes: Routes = [
         name: 'Settings',
     },
     {
+        route: '/journal',
+        path: '/pages/journal/index',
+        name: 'Journal',
+    },
+    {
         route: '/wired-sensors',
         path: '/pages/wired-sensors/index',
         name: 'Wired sensors',

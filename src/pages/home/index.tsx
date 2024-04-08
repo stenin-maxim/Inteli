@@ -48,7 +48,7 @@ export function Home() {
         textConfirm: string = Strings.getLang('confirm'),
         textContentAlarm: string = Strings.getLang('content_alarm'),
         textSettings: string = Strings.getLang('settings'),
-        //textJournal: string = Strings.getLang('journal'),
+        textJournal: string = Strings.getLang('journal'),
         textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
         textMeter: string = Strings.getLang('meter'),
@@ -398,6 +398,13 @@ export function Home() {
                     >
                         { colorIconCleaning() }
                         <Text className={styles.textButton}>{textButtonCleaning}</Text>
+                    </Button>
+                    <Button
+                        className={styles.button}
+                        onClick={() => navigateTo({ url: '/pages/journal/index'})}
+                    >
+                        <Icon type="icon-a-scrollfill" size={40}/>
+                        <Text className={styles.textButton}>{textJournal}</Text>
                     </Button>
                     <Button
                         className={styles.button}

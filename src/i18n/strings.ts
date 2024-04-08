@@ -58,6 +58,7 @@ export default {
         journal_events: 'Event Log:',
         alarm_on: 'On',
         alarm_off: 'Off',
+        alarm_text: 'Alarm:',
         condition_crane: 'The condition of the crane:',
         no_events: 'There are no events',
         // info
@@ -122,6 +123,7 @@ export default {
         journal_events: '事件日志:',
         alarm_on: '已启用',
         alarm_off: '已关闭',
+        alarm_text: '警报:',
         no_events: '没有活动',
         // info
         info: '资料',
@@ -186,6 +188,7 @@ export default {
         journal_events: 'Журнал событий:',
         alarm_on: 'Включена',
         alarm_off: 'Выключена',
+        alarm_text: 'Тревога:',
         no_events: 'Нет событий',
         // info
         info: 'Инфо',
