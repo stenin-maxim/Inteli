@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, Icon, Text, PageContainer, Input, Switch } from "@ray-js/components";
+import { View, Button, Icon, Text, PageContainer, Input, Switch, Checkbox, CheckboxGroup } from "@ray-js/components";
 import styles from './index.module.less';
 import { useDevice, useActions, useProps } from '@ray-js/panel-sdk';
 import { vibrateShort, showModal } from '@ray-js/ray';
@@ -13,6 +13,10 @@ interface Cmd {
     readonly disableIgnore: number;
     readonly enableSafetyMode: number;
     readonly disableSafetyMode: number;
+    readonly enableZone1: number;
+    readonly disableZone1: number,
+    readonly enableZone2: number,
+    readonly disableZone2: number;
 }
 
 export default () => {
@@ -23,6 +27,10 @@ export default () => {
         disableIgnore:        0x04_00_00_00, // отключить игнор аварии датчика
         enableSafetyMode:     0x05_00_00_00, // включить режим повышенной безопасности для датчика
         disableSafetyMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
+        enableZone1:          0x07_00_00_00, // включить zone 1 на датчике
+        disableZone1:         0x08_00_00_00, // выключить zone 1 на датчике
+        enableZone2:          0x09_00_00_00,
+        disableZone2:         0x10_00_00_00,
     }
     const ACTIONS: any = useActions();
 
@@ -31,11 +39,11 @@ export default () => {
     let [value, setValue] = React.useState("");
     let [item, setItem]: any = React.useState({});
     let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
-    // let statusSearch: number = useProps((props): number => Number(props.device_cmd));
     let sensors = radioSensors();
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
     let indexForDpId = {};
     let radioSearch = useProps((props): boolean => Boolean(props.radio_search));
+    let multizoneMode = useProps((props): boolean => Boolean(props.multizone_mode));
     let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
         radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
         radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
@@ -54,7 +62,10 @@ export default () => {
         textConfirm: string = Strings.getLang('confirm'),
         textIgnore: string = Strings.getLang('ignore'),
         textSafetyMode: string = Strings.getLang('safety_mode'),
-        textOk: string = Strings.getLang('ok');
+        textOk: string = Strings.getLang('ok'),
+        textZoneRadioSensor: string = Strings.getLang('zone_radio_sensor'),
+        textZone1: string = Strings.getLang('zone_1'),
+        textZone2: string = Strings.getLang('zone_2');
 
     for (let i = 141, j = 0; i <= 172; i++, j++) {
         indexForDpId[i] = j;
@@ -183,7 +194,7 @@ export default () => {
     }
 
     /**
-     * Включить/выключить игнор аварии датчика, режим повышенной безопасности при низком заряде датчика
+     * Включить/выключить игнор аварии датчика, режим повышенной безопасности при низком заряде датчика, zone1, zone2
      * 
      * @param value - состояние checkbox
      * @param sensorId - dpid датчика
@@ -233,6 +244,29 @@ export default () => {
         }
     }
 
+    function showZone(): object|false
+    {
+        if (multizoneMode) {
+            return (
+                <View className={styles.zone}>
+                    <Text className={styles.textModalWindow}>{textZoneRadioSensor}</Text>
+                    <View className={styles.checkboxZone}>
+                        <Switch type="checkbox" color="#00BFFF" checked={item.zone1}
+                            onChange={(e) => { enableDisable(e.value, item.id, cmd.enableZone1, cmd.disableZone1)}}>
+                            {textZone1}
+                        </Switch>
+                        <Switch type="checkbox" color="#00BFFF" checked={item.zone2}
+                            onChange={(e) => { enableDisable(e.value, item.id, cmd.enableZone2, cmd.disableZone2)}}>
+                            {textZone2}
+                        </Switch>
+                    </View>
+                </View>
+            )
+        }
+
+        return false
+    }
+
     function showSensors(): object
     {
         return (
@@ -254,6 +288,15 @@ export default () => {
                                 </View>
                                 <View>
                                     <Text className={styles.name}>{ item.name }</Text>
+                                    {multizoneMode ? 
+                                        <>
+                                            <View className={styles.textZone}>
+                                                { item.zone1 ? <><Text>{textZone1}</Text></> : false}
+                                                { item.zone2 ? <><Text>{textZone2}</Text></> : false}
+                                            </View>
+                                        </>
+                                        : false
+                                    }
                                 </View>
                             </View>
         
@@ -330,6 +373,7 @@ export default () => {
                                 <Text className={styles.textDeleteChange}>{textReplaceSensor}</Text>
                             </View>
                         </View>
+                        {showZone()}
                         <View className={styles.inputText}>
                             <Text className={styles.textModalWindow}>{textNameSensor}</Text>
                             <Input
