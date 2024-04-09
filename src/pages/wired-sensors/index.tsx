@@ -4,19 +4,11 @@ import styles from './index.module.less';
 import Strings from '../../i18n';
 import { useActions, useProps, useDevice } from '@ray-js/panel-sdk';
 import wiredSensors from '@/components/wired-sensors';
-
-interface Cmd {
-    readonly enableIgnore: number;
-    readonly disableIgnore: number;
-}
+import {cmd, indexForDpId, borderColor} from '@/components/sensors';
 
 export default () => {
     const ACTIONS: any = useActions();
     const idCodes = useDevice().devInfo.idCodes;
-    const cmd: Cmd = {
-        enableIgnore:           0x03_00_00_00, // включить игнор аварии датчика
-        disableIgnore:          0x04_00_00_00, // отключить игнор аварии датчика
-    }
     let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode)),
         [isShow, setIsShow] = React.useState(false),
         [value, setValue] = React.useState(""),
@@ -24,38 +16,17 @@ export default () => {
         toggleIsShow = () => setIsShow(!isShow), // Показать/скрыть модальное окно
         sensors = wiredSensors(),
         wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split(';'),
-        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split(';'),
-        indexForDpId = {};
-
+        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split(';');
     let textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
         textSettings: string = Strings.getLang('settings'),
         textIgnore: string = Strings.getLang('ignore'),
         textNameSensor: string = Strings.getLang('name_sensor'),
         textOk: string = Strings.getLang('ok');
-    
-    for (let i = 129, j = 0; i <= 140; i++, j++) {
-        indexForDpId[i] = j;
-
-        if (j === 5) {
-            j = -1;
-        }
-    }
 
     function handleInput(event: any): void
     {
         setValue(event.value);
-    }
-
-    function borderColor(item: any): string
-    {
-        if (item.ignore) {
-            return '2px solid darkgray';
-        } else if (item.leak) {
-            return '2px solid #FF0000';
-        }
-
-        return '1px solid white';
     }
 
     /**

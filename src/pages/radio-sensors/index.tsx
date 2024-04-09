@@ -1,39 +1,14 @@
 import React from 'react';
-import { View, Button, Icon, Text, PageContainer, Input, Switch, Checkbox, CheckboxGroup } from "@ray-js/components";
+import { View, Button, Icon, Text, PageContainer, Input, Switch } from "@ray-js/components";
 import styles from './index.module.less';
 import { useDevice, useActions, useProps } from '@ray-js/panel-sdk';
 import { vibrateShort, showModal } from '@ray-js/ray';
 import Strings from '../../i18n';
 import radioSensors from '@/components/radio-sensors';
-
-interface Cmd {
-    readonly search: number;
-    readonly delete: number;
-    readonly enableIgnore: number;
-    readonly disableIgnore: number;
-    readonly enableSafetyMode: number;
-    readonly disableSafetyMode: number;
-    readonly enableZone1: number;
-    readonly disableZone1: number,
-    readonly enableZone2: number,
-    readonly disableZone2: number;
-}
+import {cmd, indexForDpId, borderColor} from '@/components/sensors';
 
 export default () => {
-    const cmd: Cmd = {
-        search:               0x01_00_00_00, // команда поиск датчика
-        delete:               0x02_00_00_00, // команда удаление датчика
-        enableIgnore:         0x03_00_00_00, // включить игнор аварии датчика
-        disableIgnore:        0x04_00_00_00, // отключить игнор аварии датчика
-        enableSafetyMode:     0x05_00_00_00, // включить режим повышенной безопасности для датчика
-        disableSafetyMode:    0x06_00_00_00, // выключить режим повышенной безопасности для датчика
-        enableZone1:          0x07_00_00_00, // включить zone 1 на датчике
-        disableZone1:         0x08_00_00_00, // выключить zone 1 на датчике
-        enableZone2:          0x09_00_00_00,
-        disableZone2:         0x10_00_00_00,
-    }
     const ACTIONS: any = useActions();
-
     let idCodes = useDevice().devInfo.idCodes;
     let [isShow, setIsShow] = React.useState(false);
     let [value, setValue] = React.useState("");
@@ -41,7 +16,6 @@ export default () => {
     let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
     let sensors = radioSensors();
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
-    let indexForDpId = {};
     let radioSearch = useProps((props): boolean => Boolean(props.radio_search));
     let multizoneMode = useProps((props): boolean => Boolean(props.multizone_mode));
     let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
@@ -67,32 +41,9 @@ export default () => {
         textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2');
 
-    for (let i = 141, j = 0; i <= 172; i++, j++) {
-        indexForDpId[i] = j;
-        
-        if (j === 7) {
-            j = -1;
-        }
-    }
-
     function handleInput(event: any): void
     {
         setValue(event.value);
-    }
-
-    function borderColor(item: any): string
-    {
-        if (item.ignore) {
-            return '2px solid darkgray';
-        } else if (item.leak) {
-            return '2px solid #FF0000';
-        } else if (!item.online) {
-            return '2px solid #00BFFF';
-        } else if (item.battery < 30) {
-            return '2px solid orange';
-        }
-
-        return '1px solid white';
     }
 
     function signalColorIcon(type: string, color: string): object
