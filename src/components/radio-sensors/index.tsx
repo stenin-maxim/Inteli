@@ -1,4 +1,5 @@
-import { useProps, useDevice } from '@ray-js/panel-sdk';
+import { useProps, useDevice, useActions } from '@ray-js/panel-sdk';
+import {RADIO_SENSOR_NAMES_1, RADIO_SENSOR_NAMES_2, RADIO_SENSOR_NAMES_3, RADIO_SENSOR_NAMES_4} from '@/constant';
 
 interface Mask {
 	readonly registr: number;
@@ -12,6 +13,7 @@ interface Mask {
 }
 
 export default () => {
+	const ACTIONS: any = useActions();
     const device = useDevice().dpSchema;
 	const idCodes: object = useDevice().devInfo.idCodes;
 	const mask: Mask = {
@@ -25,12 +27,24 @@ export default () => {
 		zone2:					0b00000000_10000000_00000000_00000000, // Включена zone 2
 	}
 
-    let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)),
-        radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)),
-        radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)),
-        radioSensorName4 = useProps((props): string => String(props.radio_sensor_name_4));
+	function sensorNames(identifier: string, str: string): string
+	{
+		return useProps((props): string => {
+			if (props[identifier] === '') {
+				ACTIONS[identifier].set(str);
+				return str;
+			} 
+
+			return props[identifier];
+		})
+	}
+
+    let radioSensorNames1 = sensorNames('radio_sensor_names_1', RADIO_SENSOR_NAMES_1),
+        radioSensorNames2 = sensorNames('radio_sensor_names_2', RADIO_SENSOR_NAMES_2),
+        radioSensorNames3 = sensorNames('radio_sensor_names_3', RADIO_SENSOR_NAMES_3),
+        radioSensorNames4 = sensorNames('radio_sensor_names_4', RADIO_SENSOR_NAMES_4);
         
-    let radioSensor = radioSensorName1.concat(';', radioSensorName2, ';', radioSensorName3, ';', radioSensorName4).split(';');
+    let radioSensorNamesArr = radioSensorNames1.concat(';', radioSensorNames2, ';', radioSensorNames3, ';', radioSensorNames4).split(';');
 
     /**
 	* Создание датчика с параметрами
@@ -77,7 +91,7 @@ export default () => {
 				break;
 			}
 			
-			createSensor(Number(props[sensorIdentifier]), radioSensor[sensorNumber], Number(device[sensorIdentifier].id), sensors, ++sensorNumber);
+			createSensor(Number(props[sensorIdentifier]), radioSensorNamesArr[sensorNumber], Number(device[sensorIdentifier].id), sensors, ++sensorNumber);
 
 			i++;
 		}

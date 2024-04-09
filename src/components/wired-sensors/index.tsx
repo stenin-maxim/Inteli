@@ -1,14 +1,17 @@
-import { useProps, useDevice } from '@ray-js/panel-sdk';
+import { useProps, useDevice, useActions } from '@ray-js/panel-sdk';
+import {WIRED_SENSOR_NAMES_1, WIRED_SENSOR_NAMES_2} from '@/constant';
 
 interface Mask {
 	readonly registr: number;
 	readonly online: number;
 	readonly leak: number;
 	readonly ignore: number;
-	readonly zone: number;
+	readonly zone1: number;
+	readonly zone2: number;
 }
 
 export default () => {
+	const ACTIONS: any = useActions();
 	const device = useDevice().dpSchema;
 	const idCodes: object = useDevice().devInfo.idCodes;
 	const mask: Mask = {
@@ -16,12 +19,26 @@ export default () => {
 		online:                 0b00000000_00000010_00000000_00000000, // Статус в сети
 		leak:                   0b00000000_00000100_00000000_00000000, // Протечка
 		ignore:                 0b00000000_00001000_00000000_00000000, // Игнор аварийных состояний
-		zone:                   0b00000000_00010000_00000000_00000000, // Зона 1 - 0, Зона 2 - 1
+		zone1: 					0b00000000_01000000_00000000_00000000, // Включена zone 1
+		zone2:					0b00000000_10000000_00000000_00000000, // Включена zone 2
 	}
 
-    let wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1));
-    let wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2));
-    let wiredSensorNameArr = wiredSensorName1.concat(';', wiredSensorName2).split(';');
+	function sensorNames(identifier: string, str: string): string
+	{
+		return useProps((props): string => {
+			if (props[identifier] === '') {
+				ACTIONS[identifier].set(str);
+				return str;
+			} 
+
+			return props[identifier];
+		})
+	}
+
+    let wiredSensorNames1 = sensorNames('wired_sensor_names_1', WIRED_SENSOR_NAMES_1),
+    	wiredSensorNames2 = sensorNames('wired_sensor_names_2', WIRED_SENSOR_NAMES_2);
+
+    let wiredSensorNamesArr = wiredSensorNames1.concat(';', wiredSensorNames2).split(';');
 
 	/**
 	* Создание датчика с параметрами
@@ -43,7 +60,8 @@ export default () => {
 				online: Boolean(sensor & mask.online),
 				leak: Boolean(sensor & mask.leak),
 				ignore: Boolean(sensor & mask.ignore),
-				zone: Boolean(sensor & mask.zone),
+				zone1: Boolean(sensor & mask.zone1),
+				zone2: Boolean(sensor & mask.zone2),
 				name: sensorName,
 			});
 		}
@@ -63,7 +81,7 @@ export default () => {
 				break;
 			}
 			
-			createSensor(Number(props[sensorIdentifier]), wiredSensorNameArr[sensorNumber], Number(device[sensorIdentifier].id), sensors, ++sensorNumber);
+			createSensor(Number(props[sensorIdentifier]), wiredSensorNamesArr[sensorNumber], Number(device[sensorIdentifier].id), sensors, ++sensorNumber);
 
 			i++;
 		}
