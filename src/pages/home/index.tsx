@@ -15,7 +15,7 @@ export function Home() {
     let cleaning: boolean = useProps((props): boolean => Boolean(props.cleaning));
     let multizoneMode: boolean = useProps((props): boolean => Boolean(props.multizone_mode));
     let battery: number = useProps((props): number => Number(props.battery_percentage));
-    let counterName: Array<string> = useProps((props): string => String(props.counter_name)).split(';');
+    let counterNames: Array<string> = useProps((props): string => String(props.counter_names)).split(';');
     let counter_1: number = useProps((props): number => Number(props.counter_1)),
         counter_2: number = useProps((props): number => Number(props.counter_2)),
         counter_3: number = useProps((props): number => Number(props.counter_3)),
@@ -349,10 +349,10 @@ export function Home() {
                 objCounter3: object,
                 objCounter4: object;
 
-            if (statusCounter1) objCounter1 = counter(counter_1, multiplier_1, counterName[0]);
-            if (statusCounter2) objCounter2 = counter(counter_2, multiplier_2, counterName[1]);
-            if (statusCounter3) objCounter3 = counter(counter_3, multiplier_3, counterName[2]);
-            if (statusCounter4) objCounter4 = counter(counter_4, multiplier_4, counterName[3]);
+            if (statusCounter1) objCounter1 = counter(counter_1, multiplier_1, counterNames[0]);
+            if (statusCounter2) objCounter2 = counter(counter_2, multiplier_2, counterNames[1]);
+            if (statusCounter3) objCounter3 = counter(counter_3, multiplier_3, counterNames[2]);
+            if (statusCounter4) objCounter4 = counter(counter_4, multiplier_4, counterNames[3]);
 
             return (
                 <View className={styles.counters}>

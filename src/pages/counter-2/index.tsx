@@ -6,11 +6,11 @@ import * as componentCounter from '@/components/counter';
 
 export default () => {
     const ACTIONS: any = useActions();
-    let counterName: string = useProps((props): string => String(props.counter_name));
+    let counterNames: string = useProps((props): string => String(props.counter_names));
     let multiplier: string = useProps((props): string => String(props.multiplier_2));
     let counter: number = useProps((props): number => Number(props.counter_2));
     let statusCounter: boolean = useProps((props): boolean => Boolean(props.status_counter_2));
-    let [nameCounter, setNameCounter] = React.useState(counterName.split(';')[1]);
+    let [nameCounter, setNameCounter] = React.useState(counterNames.split(';')[1]);
     let [valueCounter, setCounter] = React.useState('');
     let viewCounter = componentCounter.viewCounter(counter, multiplier);
 
@@ -26,7 +26,7 @@ export default () => {
 
     function saveCounter(event: any): void|false
     {
-        let arr: Array<string> = counterName.split(';');
+        let arr: Array<string> = counterNames.split(';');
         let value: number;
         let str: string;
 
@@ -40,7 +40,7 @@ export default () => {
         setCounter('');
         setNameCounter(event.detail.value.name);
     
-        ACTIONS.counter_name.set(str);
+        ACTIONS.counter_names.set(str);
         ACTIONS.multiplier_2.set(event.detail.value.radio);
         ACTIONS.status_counter_2.set(Boolean(event.detail.value.status));
 

@@ -18,10 +18,10 @@ export default () => {
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
     let radioSearch = useProps((props): boolean => Boolean(props.radio_search));
     let multizoneMode = useProps((props): boolean => Boolean(props.multizone_mode));
-    let radioSensorName1 = useProps((props): string => String(props.radio_sensor_name_1)).split(';'),
-        radioSensorName2 = useProps((props): string => String(props.radio_sensor_name_2)).split(';'),
-        radioSensorName3 = useProps((props): string => String(props.radio_sensor_name_3)).split(';'),
-        radioSensorName4 = useProps((props): string => String(props.radio_sensor_name_4)).split(';');
+    let radioSensorNames1 = useProps((props): string => String(props.radio_sensor_names_1)).split(';'),
+        radioSensorNames2 = useProps((props): string => String(props.radio_sensor_names_2)).split(';'),
+        radioSensorNames3 = useProps((props): string => String(props.radio_sensor_names_3)).split(';'),
+        radioSensorNames4 = useProps((props): string => String(props.radio_sensor_names_4)).split(';');
     let textNumberOfSensors: string = Strings.getLang('number_of_sensors'),
         textNotSensors: string = Strings.getLang('not_sensors'),
         textAdd: string = Strings.getLang('add'),
@@ -177,21 +177,21 @@ export default () => {
         name = name.replace(/\;/g, '');
 
         if (dpIdSensor >= 141 && dpIdSensor <= 148) {
-            radioSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
-            str = radioSensorName1.join(';');
-            ACTIONS.radio_sensor_name_1.set(str);
+            radioSensorNames1.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorNames1.join(';');
+            ACTIONS.radio_sensor_names_1.set(str);
         } else if (dpIdSensor >= 149 && dpIdSensor <= 156) {
-            radioSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
-            str = radioSensorName2.join(';');
-            ACTIONS.radio_sensor_name_2.set(str);
+            radioSensorNames2.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorNames2.join(';');
+            ACTIONS.radio_sensor_names_2.set(str);
         } else if (dpIdSensor >= 157 && dpIdSensor <= 164) {
-            radioSensorName3.splice(indexForDpId[dpIdSensor], 1, name);
-            str = radioSensorName3.join(';');
-            ACTIONS.radio_sensor_name_3.set(str);
+            radioSensorNames3.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorNames3.join(';');
+            ACTIONS.radio_sensor_names_3.set(str);
         } else if (dpIdSensor >= 165 && dpIdSensor <= 172) {
-            radioSensorName4.splice(indexForDpId[dpIdSensor], 1, name);
-            str = radioSensorName4.join(';');
-            ACTIONS.radio_sensor_name_4.set(str);
+            radioSensorNames4.splice(indexForDpId[dpIdSensor], 1, name);
+            str = radioSensorNames4.join(';');
+            ACTIONS.radio_sensor_names_4.set(str);
         }
     }
 

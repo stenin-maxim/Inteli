@@ -9,7 +9,7 @@ import {indicatorCounter} from '@/components/counter/indicator-counter';
 export default () => {
     let textCounter: string = Strings.getLang('counter'),
         textMeter: string = Strings.getLang('meter');
-    let counterName: Array<string> = useProps((props): string => String(props.counter_name)).split(';');
+    let counterNames: Array<string> = useProps((props): string => String(props.counter_names)).split(';');
     let counter_1: number = useProps((props): number => Number(props.counter_1)),
         counter_2: number = useProps((props): number => Number(props.counter_2)),
         counter_3: number = useProps((props): number => Number(props.counter_3)),
@@ -25,7 +25,7 @@ export default () => {
                 <View className={styles.counterBlock}>
                     <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                     <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterName[0]}</Text>
+                        <Text className={styles.counterName}>{counterNames[0]}</Text>
                         <Text className={styles.counterText}>{textCounter + ' №1'}</Text>
                     </View>
                 </View>
@@ -39,7 +39,7 @@ export default () => {
                 <View className={styles.counterBlock}>
                     <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                     <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterName[1]}</Text>
+                        <Text className={styles.counterName}>{counterNames[1]}</Text>
                         <Text className={styles.counterText}>{textCounter + ' №2'}</Text>
                     </View>
                 </View>
@@ -53,7 +53,7 @@ export default () => {
                 <View className={styles.counterBlock}>
                     <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                     <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterName[2]}</Text>
+                        <Text className={styles.counterName}>{counterNames[2]}</Text>
                         <Text className={styles.counterText}>{textCounter + ' №3'}</Text>
                     </View>
                 </View>
@@ -67,7 +67,7 @@ export default () => {
                 <View className={styles.counterBlock}>
                     <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
                     <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterName[3]}</Text>
+                        <Text className={styles.counterName}>{counterNames[3]}</Text>
                         <Text className={styles.counterText}>{textCounter + ' №4'}</Text>
                     </View>
                 </View>

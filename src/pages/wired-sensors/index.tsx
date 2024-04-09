@@ -15,8 +15,8 @@ export default () => {
         [item, setItem]: any = React.useState({}),
         toggleIsShow = () => setIsShow(!isShow), // Показать/скрыть модальное окно
         sensors = wiredSensors(),
-        wiredSensorName1 = useProps((props): string => String(props.wired_sensor_name_1)).split(';'),
-        wiredSensorName2 = useProps((props): string => String(props.wired_sensor_name_2)).split(';');
+        wiredSensorNames1 = useProps((props): string => String(props.wired_sensor_names_1)).split(';'),
+        wiredSensorNames2 = useProps((props): string => String(props.wired_sensor_names_2)).split(';');
     let textZone1: string = Strings.getLang('zone_1'),
         textZone2: string = Strings.getLang('zone_2'),
         textSettings: string = Strings.getLang('settings'),
@@ -41,13 +41,13 @@ export default () => {
         name = name.replace(/\;/g, '');
 
         if (dpIdSensor >= 129 && dpIdSensor <= 134) {
-            wiredSensorName1.splice(indexForDpId[dpIdSensor], 1, name);
-            str = wiredSensorName1.join(';');
-            ACTIONS.wired_sensor_name_1.set(str);
+            wiredSensorNames1.splice(indexForDpId[dpIdSensor], 1, name);
+            str = wiredSensorNames1.join(';');
+            ACTIONS.wired_sensor_names_1.set(str);
         } else if (dpIdSensor >= 135 && dpIdSensor <= 140) {
-            wiredSensorName2.splice(indexForDpId[dpIdSensor], 1, name);
-            str = wiredSensorName2.join(';');
-            ACTIONS.wired_sensor_name_2.set(str);
+            wiredSensorNames2.splice(indexForDpId[dpIdSensor], 1, name);
+            str = wiredSensorNames2.join(';');
+            ACTIONS.wired_sensor_names_2.set(str);
         }
     }
 
@@ -108,7 +108,7 @@ export default () => {
                     <View className={styles.zone}>{textZone1}</View>
                     {
                         sensors.map((item: any, index: number) => {
-                            if (item.zone === false) {
+                            if (item.zone1) {
                                 return viewSensor(item, index);
                             }
                         })
@@ -116,7 +116,7 @@ export default () => {
                     <View className={styles.zone}>{textZone2}</View>
                     {
                         sensors.map((item: any, index: number) => {
-                            if (item.zone) {
+                            if (item.zone2) {
                                 return viewSensor(item, index);
                             }
                         })

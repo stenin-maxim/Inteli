@@ -19,31 +19,6 @@ export const defaultSchema = [
   {
     "attr": 1216,
     "canTrigger": true,
-    "code": "fault",
-    "defaultRecommend": false,
-    "editPermission": true,
-    "executable": false,
-    "extContent": "",
-    "iconname": "icon-baojing",
-    "id": 4,
-    "mode": "ro",
-    "name": "故障上报",
-    "property": {
-      "label": [
-        "low_battery",
-        "fault",
-        "lack_water",
-        "sensor_fault",
-        "motor_fault"
-      ],
-      "type": "bitmap",
-      "maxlen": 5
-    },
-    "type": "obj"
-  },
-  {
-    "attr": 1216,
-    "canTrigger": true,
     "code": "battery_percentage",
     "defaultRecommend": false,
     "editPermission": true,
@@ -444,14 +419,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "counter_name",
+    "code": "counter_names",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 122,
     "mode": "rw",
-    "name": "Counter name",
+    "name": "Counter names",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -461,14 +436,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "wired_sensor_name_1",
+    "code": "wired_sensor_names_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 123,
     "mode": "rw",
-    "name": "Wired sensor name 1",
+    "name": "Wired sensor names 1",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -478,14 +453,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "wired_sensor_name_2",
+    "code": "wired_sensor_names_2",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 124,
     "mode": "rw",
-    "name": "Wired sensor name 2",
+    "name": "Wired sensor names 2",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -495,14 +470,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "radio_sensor_name_1",
+    "code": "radio_sensor_names_1",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 125,
     "mode": "rw",
-    "name": "Radio sensor name 1",
+    "name": "Radio sensor names 1",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -512,14 +487,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "radio_sensor_name_2",
+    "code": "radio_sensor_names_2",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 126,
     "mode": "rw",
-    "name": "Radio sensor name 2",
+    "name": "Radio sensor names 2",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -529,14 +504,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "radio_sensor_name_3",
+    "code": "radio_sensor_names_3",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 127,
     "mode": "rw",
-    "name": "Radio sensor name 3",
+    "name": "Radio sensor names 3",
     "property": {
       "type": "string",
       "maxlen": 255
@@ -546,14 +521,14 @@ export const defaultSchema = [
   {
     "attr": 0,
     "canTrigger": true,
-    "code": "radio_sensor_name_4",
+    "code": "radio_sensor_names_4",
     "defaultRecommend": false,
     "editPermission": false,
     "executable": true,
     "extContent": "",
     "id": 128,
     "mode": "rw",
-    "name": "Radio sensor name 4",
+    "name": "Radio sensor names 4",
     "property": {
       "type": "string",
       "maxlen": 255
