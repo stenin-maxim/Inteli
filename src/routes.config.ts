@@ -32,6 +32,11 @@ export const routes: Routes = [
         name: 'Counters',
     },
     {
+        route: '/info',
+        path: '/pages/info/index',
+        name: 'Info',
+    },
+    {
         route: '/counter-1',
         path: '/pages/counter-1/index',
         name: 'Counter 1',
