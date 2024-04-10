@@ -19,64 +19,37 @@ export default () => {
         multiplier_3: string = useProps((props): string => String(props.multiplier_3)),
         multiplier_4: string = useProps((props): string => String(props.multiplier_4));
 
+    let objCounters: Array<any> = [
+        [counter_1, multiplier_1],
+        [counter_2, multiplier_2],
+        [counter_3, multiplier_3],
+        [counter_4, multiplier_4],
+    ];
+    
     return (
         <View>
-            <View className={styles.counter} onClick={() => navigateTo({ url: '/pages/counter-1/index'})}>
-                <View className={styles.counterBlock}>
-                    <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                    <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterNames[0]}</Text>
-                        <Text className={styles.counterText}>{textCounter + ' №1'}</Text>
-                    </View>
-                </View>
-                <View>
-                    <Text className={styles.indicatorCounter}>{ indicatorCounter(counter_1, multiplier_1) }</Text>
-                    <Text>{textMeter}</Text>
-                    <Text>3</Text>
-                </View>
-            </View>
-            <View className={styles.counter} onClick={() => navigateTo({ url: '/pages/counter-2/index'})}>
-                <View className={styles.counterBlock}>
-                    <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                    <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterNames[1]}</Text>
-                        <Text className={styles.counterText}>{textCounter + ' №2'}</Text>
-                    </View>
-                </View>
-                <View>
-                    <Text className={styles.indicatorCounter}>{ indicatorCounter(counter_2, multiplier_2) }</Text>
-                    <Text>{textMeter}</Text>
-                    <Text>3</Text>
-                </View>
-            </View>
-            <View className={styles.counter} onClick={() => navigateTo({ url: '/pages/counter-3/index'})}>
-                <View className={styles.counterBlock}>
-                    <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                    <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterNames[2]}</Text>
-                        <Text className={styles.counterText}>{textCounter + ' №3'}</Text>
-                    </View>
-                </View>
-                <View>
-                    <Text className={styles.indicatorCounter}>{ indicatorCounter(counter_3, multiplier_3) }</Text>
-                    <Text>{textMeter}</Text>
-                    <Text>3</Text>
-                </View>
-            </View>
-            <View className={styles.counter} onClick={() => navigateTo({ url: '/pages/counter-4/index'})}>
-                <View className={styles.counterBlock}>
-                    <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
-                    <View className={styles.counterNameText}>
-                        <Text className={styles.counterName}>{counterNames[3]}</Text>
-                        <Text className={styles.counterText}>{textCounter + ' №4'}</Text>
-                    </View>
-                </View>
-                <View>
-                    <Text className={styles.indicatorCounter}>{ indicatorCounter(counter_4, multiplier_4) }</Text>
-                    <Text>{textMeter}</Text>
-                    <Text>3</Text>
-                </View>
-            </View>
-        </View>    
-    ) 
+            {
+                objCounters.map((item, index) => {
+                    return (
+                        <React.Fragment key={index}>
+                            <View className={styles.counter} onClick={() => navigateTo({ url: `/pages/counter-${index + 1}/index`})}>
+                                <View className={styles.counterBlock}>
+                                    <Icon type="icon-timer" size={30} color="#00BFFF" style={{ position: 'relative', top: '2px' }}></Icon>
+                                    <View className={styles.counterNameText}>
+                                        <Text className={styles.counterName}>{counterNames[index]}</Text>
+                                        <Text className={styles.counterText}>{textCounter + `№ ${index + 1}`}</Text>
+                                    </View>
+                                </View>
+                                <View>
+                                    <Text className={styles.indicatorCounter}>{ indicatorCounter(item[0], item[1]) }</Text>
+                                    <Text>{textMeter}</Text>
+                                    <Text>3</Text>
+                                </View>
+                            </View>
+                        </React.Fragment>
+                    )
+                })
+            }
+        </View>   
+    )
 }
