@@ -329,7 +329,6 @@ export function Home() {
                     <Text>{indicatorCounter(counter, multiplier)}</Text>
                     <View className={styles.meterCube}>
                         <Text>{textMeter}</Text>
-                        <Text className={styles.cube}>3</Text>
                     </View>
                 </View>
             </View>

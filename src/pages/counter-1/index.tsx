@@ -64,7 +64,6 @@ export default () => {
                     </View>
                     <View className={styles.meterCube}>
                         <Text>{componentCounter.textMeter}</Text>
-                        <Text className={styles.cube}>3</Text>
                     </View>
                 </View>
                 <View className={styles.editCounter}>
