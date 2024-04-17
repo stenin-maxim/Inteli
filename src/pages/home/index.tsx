@@ -5,7 +5,7 @@ import styles from './index.module.less';
 import { useActions, useProps, useDevInfo } from '@ray-js/panel-sdk';
 import Strings from '../../i18n';
 import {indicatorCounter} from '@/components/counter/indicator-counter';
-import radioSensors from '@/components/radio-sensors';
+import radioSensors from '@/components/sensors/sensors';
 
 export function Home() {
     const ACTIONS: any = useActions();
@@ -28,7 +28,7 @@ export function Home() {
         statusCounter2: boolean = useProps((props): boolean => Boolean(props.status_counter_2)),
         statusCounter3: boolean = useProps((props): boolean => Boolean(props.status_counter_3)),
         statusCounter4: boolean = useProps((props): boolean => Boolean(props.status_counter_4));
-    let arrRadioSensors: Array<any> = radioSensors();
+    let arrRadioSensors: Array<any> = radioSensors('radio');
     let sensorsSafetyMode = [];
     let textBattery: string = Strings.getLang('battery'),
         textDevice: string = Strings.getLang('device'),

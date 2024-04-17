@@ -4,7 +4,7 @@ import styles from './index.module.less';
 import { useDevice, useActions, useProps } from '@ray-js/panel-sdk';
 import { vibrateShort, showModal } from '@ray-js/ray';
 import Strings from '../../i18n';
-import radioSensors from '@/components/radio-sensors';
+import radioSensors from '@/components/sensors/sensors';
 import {cmd, indexForDpId, borderColor} from '@/components/sensors';
 
 export default () => {
@@ -14,7 +14,7 @@ export default () => {
     let [value, setValue] = React.useState("");
     let [item, setItem]: any = React.useState({});
     let toggleIsShow = () => setIsShow(!isShow); // Показать/скрыть модальное окно
-    let sensors = radioSensors();
+    let sensors = radioSensors('radio');
     let countSensors: number = sensors.length == undefined ? 0 : sensors.length;
     let radioSearch = useProps((props): boolean => Boolean(props.radio_search));
     let multizoneMode = useProps((props): boolean => Boolean(props.multizone_mode));
