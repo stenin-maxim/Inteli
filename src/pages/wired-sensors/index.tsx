@@ -3,7 +3,7 @@ import { View, Text, Input, Switch, PageContainer, Button } from '@ray-js/ray';
 import styles from './index.module.less';
 import Strings from '../../i18n';
 import { useActions, useProps, useDevice } from '@ray-js/panel-sdk';
-import wiredSensors from '@/components/wired-sensors';
+import wiredSensors from '@/components/sensors/sensors';
 import {cmd, indexForDpId, borderColor} from '@/components/sensors';
 
 export default () => {
@@ -14,7 +14,7 @@ export default () => {
         [value, setValue] = React.useState(""),
         [item, setItem]: any = React.useState({}),
         toggleIsShow = () => setIsShow(!isShow), // Показать/скрыть модальное окно
-        sensors = wiredSensors(),
+        sensors = wiredSensors('wired'),
         wiredSensorNames1 = useProps((props): string => String(props.wired_sensor_names_1)).split(';'),
         wiredSensorNames2 = useProps((props): string => String(props.wired_sensor_names_2)).split(';');
     let textZone1: string = Strings.getLang('zone_1'),
