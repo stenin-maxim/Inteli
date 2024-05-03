@@ -120,6 +120,7 @@ export default () => {
             title: title,
             content: content,
             cancelText: textCancel,
+            cancelColor: '#787878',
             confirmText: textConfirm,
             confirmColor: '#ff0000',
             success: (param: any): void => {
@@ -330,6 +331,7 @@ export default () => {
                             <Input
                                 className={styles.inputModalWindow}
                                 placeholder="Name Sensor"
+                                placeholderStyle={{color: '#808080'}}
                                 maxLength={24}
                                 type="text"
                                 value={value}

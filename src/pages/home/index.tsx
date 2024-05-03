@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Button, Icon, Text } from '@ray-js/ray';
-import { navigateTo, vibrateShort, showToast, showModal } from '@ray-js/ray';
+import { View, Button, Icon, Text, navigateTo, vibrateShort, showToast, showModal } from '@ray-js/ray';
 import styles from './index.module.less';
 import { useActions, useProps, useDevInfo } from '@ray-js/panel-sdk';
 import Strings from '../../i18n';
@@ -29,7 +28,7 @@ export function Home() {
         statusCounter3: boolean = useProps((props): boolean => Boolean(props.status_counter_3)),
         statusCounter4: boolean = useProps((props): boolean => Boolean(props.status_counter_4));
     let arrRadioSensors: Array<any> = radioSensors('radio');
-    let sensorsSafetyMode = [];
+    let sensorsSafetyMode: Array<number> = [];
     let textBattery: string = Strings.getLang('battery'),
         textDevice: string = Strings.getLang('device'),
         textCharging: string = Strings.getLang('charging'),
@@ -133,6 +132,7 @@ export function Home() {
             title: textDisableAlarm,
             content: textContentAlarm,
             cancelText: textCancel,
+            cancelColor: '#787878',
             confirmText: textConfirm,
             confirmColor: '#ff0000',
             success: (param: any): void => {
