@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Icon, Text } from '@ray-js/ray';
+import { View, Icon, Text, navigateTo } from '@ray-js/ray';
 import styles from './index.module.less';
-import { navigateTo } from '@ray-js/ray';
 import Strings from '../../i18n';
-import { useProps } from '@ray-js/panel-sdk';
-import {indicatorCounter} from '@/components/counter/indicator-counter';
+import { useProps, useActions } from '@ray-js/panel-sdk';
+import { indicatorCounter } from '@/components/counter/indicator-counter';
+import { COUNTER_NAMES } from '@/constant';
 
 export default () => {
+    const ACTIONS: any = useActions();
     let textCounter: string = Strings.getLang('counter'),
         textMeter: string = Strings.getLang('meter');
-    let counterNames: Array<string> = useProps((props): string => String(props.counter_names)).split(';');
     let counter_1: number = useProps((props): number => Number(props.counter_1)),
         counter_2: number = useProps((props): number => Number(props.counter_2)),
         counter_3: number = useProps((props): number => Number(props.counter_3)),
@@ -24,6 +24,11 @@ export default () => {
         [counter_3, multiplier_3],
         [counter_4, multiplier_4],
     ];
+    let counterNames: Array<string> = useProps((props): string => {
+        props.counter_names === '' && ACTIONS.counter_names.set(COUNTER_NAMES);
+
+        return String(props.counter_names);
+    }).split(';');
     
     return (
         <View>
