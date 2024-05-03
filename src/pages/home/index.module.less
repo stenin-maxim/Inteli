@@ -1,9 +1,4 @@
-@colorSteelBlue: #4682B4;
-@colorLogo: #018BFF;
-@colorDeepSkyBlue: #00BFFF;
-@colorWhite: #FFFFFF;
-@colorRed: red;
-@colorBlack: #3B3B3B;
+@import '../../variables.less';
 
 .view {
     display: flex;
@@ -11,7 +6,6 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #efefef;
 }
 
 .logo {
@@ -62,7 +56,7 @@
     left: 0;
     margin: 10px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255);
 }
 
 .battery {
@@ -75,6 +69,7 @@
     width: 110px;
     max-height: 95px;
     margin: 5px 10px;
+    color: @colorBlack;
     .batteryText {
         font-size: 12px;
         width: 90px;
@@ -120,7 +115,6 @@
 
 .textSwitch {
     font-weight: 500;
-    color: @colorBlack;
 }
 
 .textButton {
@@ -148,7 +142,6 @@
 }
 
 .blockCraneCondition {
-    background-color: rgba(255, 255, 255, 0.4);
     margin: 15px;
     padding: 10px 0 0;
     position: absolute;
@@ -158,6 +151,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    border-radius: 10px;
 }
 
 .zone {
@@ -230,6 +224,7 @@
     padding: 10px;
     border-radius: 10px;
     font-size: 14px;
+    color: @colorBlack;
 }
 
 .displayFlex {

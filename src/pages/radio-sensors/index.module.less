@@ -1,8 +1,4 @@
-@colorSteelBlue: #4682B4;
-@colorBackground: #f2f4f6;
-@colorWhite: #FFFFFF;
-@colorGrayLight: #D3D3D3;
-@colorBlack: #3B3B3B;
+@import '../../variables.less';
 
 .numberOfSensors {
     margin: 15px 0;
@@ -17,12 +13,10 @@
 .title {
     font-size: 15px;
     padding-left: 10px;
-    color: @colorBlack;
 }
 
 .countSensors {
     padding-left: 7px;
-    color: @colorSteelBlue;
     font-size: 15px;
 }
 
@@ -67,7 +61,7 @@
 
 .sensorNumberNorm {
     background-color: #efefef;
-    color: #000;
+    color: @colorBlack;
     .sensorNumber
 }
 
@@ -123,6 +117,7 @@
     text-align: center;
     padding: 10px 5px;
     font-size: 16px;
+    color: @colorBlack;
 }
 
 .buttonModalWindow {
@@ -143,6 +138,7 @@
     display: flex;
     justify-content: space-around;
     margin: 18px 0 0;
+    color: @colorBlack;
 }
 /* end modal window */
 

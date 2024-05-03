@@ -1,8 +1,4 @@
-@colorSteelBlue: #4682B4;
-@colorBackground: #f2f4f6;
-@colorWhite: #FFFFFF;
-@colorGrayLight: #D3D3D3;
-@colorBlack: #3B3B3B;
+@import '../../variables.less';
 
 .zone {
     text-align: center;
@@ -23,7 +19,6 @@
 
 .sensor {
     background: @colorWhite;
-    // margin: 10px;
     min-height: 70px;
     border-radius: 10px;
     padding: 10px 15px;
@@ -60,7 +55,7 @@
 }
 
 .sensorNumberAlarm {
-    background-color: red;
+    background-color: @colorRed;
     color: @colorWhite;
     .sensorNumber
 }
@@ -106,6 +101,7 @@
     text-align: center;
     padding: 10px 5px;
     font-size: 16px;
+    color: @colorBlack;
 }
 
 .buttonModalWindow {
