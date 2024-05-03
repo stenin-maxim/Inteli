@@ -14,9 +14,9 @@ interface Mask {
 
 export default (sensorType: string) => {
 	const ACTIONS: any = useActions();
-    const device = useDevice().dpSchema;
+    const device: object = useDevice().dpSchema;
 	const idCodes: object = useDevice().devInfo.idCodes;
-	const mask: Mask = {
+	const MASK: Mask = {
 		registr:                0b00000000_00000001_00000000_00000000, // Зарегестрированный датчик
 		online:                 0b00000000_00000010_00000000_00000000, // Статус в сети
 		leak:                   0b00000000_00000100_00000000_00000000, // Протечка
@@ -27,15 +27,15 @@ export default (sensorType: string) => {
 		zone2:					0b00000000_10000000_00000000_00000000, // Включена zone 2
 	}
 
-    let wiredSensorNames1 = sensorNames('wired_sensor_names_1', WIRED_SENSOR_NAMES_1),
-        wiredSensorNames2 = sensorNames('wired_sensor_names_2', WIRED_SENSOR_NAMES_2),
-        radioSensorNames1 = sensorNames('radio_sensor_names_1', RADIO_SENSOR_NAMES_1),
-        radioSensorNames2 = sensorNames('radio_sensor_names_2', RADIO_SENSOR_NAMES_2),
-        radioSensorNames3 = sensorNames('radio_sensor_names_3', RADIO_SENSOR_NAMES_3),
-        radioSensorNames4 = sensorNames('radio_sensor_names_4', RADIO_SENSOR_NAMES_4);
+    let wiredSensorNames1: string = sensorNames('wired_sensor_names_1', WIRED_SENSOR_NAMES_1),
+        wiredSensorNames2: string = sensorNames('wired_sensor_names_2', WIRED_SENSOR_NAMES_2),
+        radioSensorNames1: string = sensorNames('radio_sensor_names_1', RADIO_SENSOR_NAMES_1),
+        radioSensorNames2: string = sensorNames('radio_sensor_names_2', RADIO_SENSOR_NAMES_2),
+        radioSensorNames3: string = sensorNames('radio_sensor_names_3', RADIO_SENSOR_NAMES_3),
+        radioSensorNames4: string = sensorNames('radio_sensor_names_4', RADIO_SENSOR_NAMES_4);
 
-    let wiredSensorNamesArr = wiredSensorNames1.concat(';', wiredSensorNames2).split(';'),
-    	radioSensorNamesArr = radioSensorNames1.concat(';', radioSensorNames2, ';', radioSensorNames3, ';', radioSensorNames4).split(';');
+    let wiredSensorNamesArr: Array<string> = wiredSensorNames1.concat(';', wiredSensorNames2).split(';'),
+    	radioSensorNamesArr: Array<string> = radioSensorNames1.concat(';', radioSensorNames2, ';', radioSensorNames3, ';', radioSensorNames4).split(';');
 
 	function sensorNames(identifier: string, str: string): string
 	{
@@ -61,17 +61,17 @@ export default (sensorType: string) => {
 	*/
 	function createSensor(sensor: number, sensorName: string, sensorId: number, sensors: object[], sensorNumber: number): object[]
 	{
-		if (Boolean(sensor & mask.registr)) {
+		if (Boolean(sensor & MASK.registr)) {
 			if (sensorType === 'wired') {
 				sensors.push({
 					id: sensorId,
 					sensorNumber: sensorNumber,
-					registr: Boolean(sensor & mask.registr),
-					online: Boolean(sensor & mask.online),
-					leak: Boolean(sensor & mask.leak),
-					ignore: Boolean(sensor & mask.ignore),
-					zone1: Boolean(sensor & mask.zone1),
-					zone2: Boolean(sensor & mask.zone2),
+					registr: Boolean(sensor & MASK.registr),
+					online: Boolean(sensor & MASK.online),
+					leak: Boolean(sensor & MASK.leak),
+					ignore: Boolean(sensor & MASK.ignore),
+					zone1: Boolean(sensor & MASK.zone1),
+					zone2: Boolean(sensor & MASK.zone2),
 					name: sensorName,
 				});
 			}
@@ -80,14 +80,14 @@ export default (sensorType: string) => {
 				sensors.push({
 					id: sensorId,
 					sensorNumber: sensorNumber,
-					registr: Boolean(sensor & mask.registr),
-					online: Boolean(sensor & mask.online),
-					leak: Boolean(sensor & mask.leak),
-					ignore: Boolean(sensor & mask.ignore),
-					zone1: Boolean(sensor & mask.zone1),
-					zone2: Boolean(sensor & mask.zone2),
-					safetyMode: Boolean(sensor & mask.safetyMode),
-					statusBatterySignal: Boolean(sensor & mask.statusBatterySignal),
+					registr: Boolean(sensor & MASK.registr),
+					online: Boolean(sensor & MASK.online),
+					leak: Boolean(sensor & MASK.leak),
+					ignore: Boolean(sensor & MASK.ignore),
+					zone1: Boolean(sensor & MASK.zone1),
+					zone2: Boolean(sensor & MASK.zone2),
+					safetyMode: Boolean(sensor & MASK.safetyMode),
+					statusBatterySignal: Boolean(sensor & MASK.statusBatterySignal),
 					battery: Number(sensor & 0xFF),
 					signal: Number((sensor >> 8) & 0xFF),
 					name: sensorName,
@@ -99,10 +99,11 @@ export default (sensorType: string) => {
 	}
 
     return useProps((props: any) => {
-		let sensors: Array<object> = [];
-		let i: number = 0, endDpId: number = 0;
-		let sensorNumber: number = 0;
-		let sensorNamesArr: Array<string>;
+		let i: number = 0, 
+			endDpId: number = 0,
+			sensors: Array<object> = [],
+			sensorNumber: number = 0,
+			sensorNamesArr: Array<string>;
 
 		if (sensorType === 'wired') {
 			sensorNamesArr = wiredSensorNamesArr;
