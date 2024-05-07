@@ -202,7 +202,7 @@ export default {
         disable_alarm: 'تعطيل التعطل',
         on: 'مفتوح',
         off: 'مغلق',
-        notify_cleaning: 'وضع تنظيف الأرضيات قيد التشغيل!',
+        notify_cleaning: 'وضع غسل الأرضية قيد التشغيل!',
         cleaning_mode_on: 'وضع التنظيف قيد التشغيل لمدة 60 دقيقة.',
         cleaning_mode_off: 'يتم إيقاف تشغيل وضع التنظيف.',
         cleaning: 'التنظيف',
